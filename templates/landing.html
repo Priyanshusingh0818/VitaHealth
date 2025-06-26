@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitaHealth Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #001220;
+            color: #fff;
+            min-height: 100vh;
+            background-attachment: fixed;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(29, 78, 216, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(124, 58, 237, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(245, 158, 11, 0.15) 0px, transparent 50%);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: rgba(1, 10, 20, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 0;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 2.8rem;
+            margin-right: 15px;
+            color: #3b82f6;
+            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-top: 10px;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex: 1;
+        }
+        
+        .intro-text {
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 800px;
+            background: rgba(1, 10, 20, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .intro-text:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .intro-text h2 {
+            margin-bottom: 1rem;
+            font-weight: 600;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .service-box {
+            background: rgba(1, 10, 20, 0.7);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .service-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
+            z-index: 0;
+        }
+        
+        .service-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+        
+        .service-box i {
+            font-size: 3rem;
+            color: #3b82f6;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
+            transition: transform 0.3s ease;
+        }
+
+        .service-box:hover i {
+            transform: scale(1.1);
+            color: #8b5cf6;
+        }
+        
+        .service-box h2 {
+            color: #fff;
+            margin: 0.5rem 0;
+            font-size: 1.8rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-box p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-box button {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-box button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 6px 15px rgba(59, 130, 246, 0.4);
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+        }
+        
+        .service-box a {
+            text-decoration: none;
+        }
+        
+        /* Enhanced Professional Footer */
+        footer {
+            background: rgba(1, 10, 20, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 3rem 0 0rem;
+            margin-top: 3rem;
+            color: #fff;
+            box-shadow: 0px -5px 20px rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .footer-content {
+            display: flex;
+            max-width: 3000px;
+            margin: 0rem auto;
+            padding: 1.7rem 20rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20rem;
+        }
+        
+        .footer-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            position: relative;
+            color: #fff;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+        }
+        
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s;
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: #3b82f6;
+            transform: translateX(5px);
+        }
+        
+        .footer-links i {
+            margin-right: 8px;
+            color: #3b82f6;
+            font-size: 0.9rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: #3b82f6;
+            font-size: 1.2rem;
+        }
+        
+        .social-icons {
+            display: flex;
+            margin: 1.5rem 0;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 50%;
+            margin-right: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            transform: translateY(-5px);
+            background: #3b82f6;
+        }
+        
+        .social-icons i {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .footer-newsletter input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 30px;
+            padding: 0.7rem 1rem;
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #fff;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-newsletter input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+        }
+        
+        .footer-newsletter button {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-weight: 500;
+        }
+        
+        .footer-newsletter button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        .footer-bottom a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        
+        .diagnose-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            background: rgba(1, 10, 20, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .diagnose-container h2 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            text-align: center;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .diagnose-container p {
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .disease-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .disease-box {
+            background: rgba(1, 10, 20, 0.8);
+            border-radius: 12px;
+            padding: 1.8rem;
+            text-align: center;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .disease-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
+            z-index: 0;
+        }
+        
+        .disease-box i {
+            font-size: 2.5rem;
+            color: #3b82f6;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        
+        .disease-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .disease-box:hover i {
+            transform: scale(1.1);
+            color: #8b5cf6;
+        }
+        
+        .disease-box h3 {
+            color: #fff;
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .disease-box p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .disease-box button {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-size: 0.9rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .disease-box button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 6px 15px rgba(59, 130, 246, 0.4);
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 0.7rem 1.5rem;
+            background: rgba(59, 130, 246, 0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 30px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            transition: background-color 0.2s, transform 0.2s;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .back-button i {
+            margin-right: 8px;
+        }
+        
+        .back-button:hover {
+            background: rgba(59, 130, 246, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        #diagnose-page {
+            display: none;
+        }
+        
+        #main-page {
+            display: block;
+        }
+        
+        .error-message {
+            background-color: rgba(239, 68, 68, 0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-left: 4px solid #ef4444;
+            padding: 1rem;
+            margin: 1rem auto;
+            border-radius: 10px;
+            display: none;
+            max-width: 800px;
+            color: #fff;
+        }
+        
+        .features-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 1rem;
+            width: 200px;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-item i {
+            font-size: 2.5rem;
+            color: #3b82f6;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
+        }
+        
+        .feature-item h3 {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
+            }
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.8));
+            }
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
+            }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(1, 10, 20, 0.8);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(59, 130, 246, 0.5);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(59, 130, 246, 0.8);
+        }
+        
+        @media (max-width: 992px) {
+            .features-list {
+                justify-content: center;
+            }
+            
+            .feature-item {
+                width: 180px;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .services {
+                grid-template-columns: 1fr;
+            }
+            
+            .disease-options {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-heartbeat logo-icon pulse"></i>
+            <h1>VitaHealth</h1>
+        </div>
+        <div class="subtitle">Your Complete Healthcare Solution</div>
+    </header>
+
+    <div id="error-notification" class="error-message container">
+        <p><i class="fas fa-exclamation-circle"></i> An error occurred. Please try again later.</p>
+    </div>
+
+    <div id="main-page">
+        <div class="container">
+            <div class="intro-text">
+                <h2>Revolutionizing Healthcare with AI</h2>
+                <p>Welcome to VitaHealth - your all-in-one platform for personalized healthcare services powered by cutting-edge artificial intelligence. From disease diagnosis to diet recommendations, we offer a comprehensive suite of tools designed to enhance your wellbeing.</p>
+            </div>
+
+            <div class="services">
+                <div class="service-box">
+                    <div>
+                        <i class="fas fa-stethoscope"></i>
+                        <h2>Diagnose Disease</h2>
+                        <p>Advanced AI tools to help diagnose various medical conditions with high accuracy</p>
+                    </div>
+                    <a href="#" onclick="showDiagnosePage(); return false;">
+                        <button>Click Me</button>
+                    </a>
+                </div>
+
+                <div class="service-box">
+                    <div>
+                        <i class="fas fa-apple-alt"></i>
+                        <h2>Diet Recommendation</h2>
+                        <p>Get personalized diet plans based on your health profile and nutritional needs</p>
+                    </div>
+                    <a href="http://127.0.0.1:5000">
+                        <button>Click Me</button>
+                    </a>
+                </div>
+                
+                <div class="service-box">
+                    <div>
+                        <i class="fas fa-comments"></i>
+                        <h2>Your Chat Buddy</h2>
+                        <p>Talk to our AI assistant about your health concerns and get instant guidance</p>
+                    </div>
+                    <a href="http://127.0.0.1:5002">
+                        <button>Click Me</button>
+                    </a>
+                </div>
+
+                <div class="service-box">
+                    <div>
+                        <i class="fas fa-pills"></i>
+                        <h2>Check The Medicine</h2>
+                        <p>Verify medicine information and identify possible interactions with other medications</p>
+                    </div>
+                    <a href="http://127.0.0.1:5003">
+                        <button>Click Me</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="diagnose-page">
+        <div class="diagnose-container">
+            <a href="#" class="back-button" onclick="showMainPage(); return false;">
+                <i class="fas fa-arrow-left"></i> Back to Services
+            </a>
+            <h2>Diagnose Disease</h2>
+            <p>Our advanced AI algorithms can help detect possible health conditions. Please select the type of diagnosis you need:</p>
+            
+            <div class="disease-options">
+                <div class="disease-box">
+                    <i class="fas fa-brain"></i>
+                    <h3>Brain Tumor</h3>
+                    <p>AI-powered brain tumor detection and analysis using MRI images</p>
+                    <a href="http://127.0.0.1:5005">
+                        <button>Click Me</button>
+                    </a>
+                </div>
+                <div class="disease-box">
+                    <i class="fas fa-lungs"></i>
+                    <h3>Lung Cancer</h3>
+                    <p>Advanced lung cancer screening and detection using CT scan analysis</p>
+                    <a href="http://127.0.0.1:5004">
+                        <button>Click Me</button>
+                    </a>
+                </div>
+                <div class="disease-box">
+                    <i class="fas fa-virus"></i>
+                    <h3>Pneumonia</h3>
+                    <p>Pneumonia detection and severity assessment using X-ray image analysis</p>
+                    <a href="http://127.0.0.1:5001">
+                        <button>Click Me</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About VitaHealth</h3>
+                <p>VitaHealth is a pioneering healthcare platform that integrates advanced AI technology to provide accurate disease diagnosis, personalized health recommendations, and medical information.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <!-- <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Services</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                </ul>
+            </div> -->
+            
+            <div class="footer-section">
+                <h3>Our Services</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-stethoscope"></i> Disease Diagnosis</a></li>
+                    <li><a href="#"><i class="fas fa-apple-alt"></i> Diet Recommendations</a></li>
+                    <li><a href="#"><i class="fas fa-comments"></i> Health Consultation</a></li>
+                    <li><a href="#"><i class="fas fa-pills"></i> Medication Information</a></li>
+                    <li><a href="#"><i class="fas fa-heartbeat"></i> Health Monitoring</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>123 Healthcare Ave, Medical District, CA 90210</span>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <span>contact@vitahealth.com</span>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-phone"></i>
+                    <span>+1 (800) 123-4567</span>
+                </div>
+                <div class="footer-newsletter">
+                    <h3>Subscribe to Our Newsletter</h3>
+                    <input type="email" placeholder="Enter your email">
+                    <button type="submit">Subscribe</button>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <script>
+        // Only allow clicking on buttons for navigation
+        document.querySelectorAll('.service-box').forEach(box => {
+            box.onclick = null; // Remove any onclick handlers from the boxes
+        });
+        
+        document.querySelectorAll('.disease-box').forEach(box => {
+            box.onclick = null; // Remove any onclick handlers from the boxes
+        });
+        
+        function showDiagnosePage() {
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('diagnose-page').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+        
+        function showMainPage() {
+            document.getElementById('main-page').style.display = 'block';
+            document.getElementById('diagnose-page').style.display = 'none';
+            window.scrollTo(0, 0);
+        }
+
+        function redirectTo(path) {
+            try {
+                // ADD YOUR BASE URL HERE IF NEEDED
+                window.location.href = path;
+            } catch (error) {
+                showError('Failed to redirect. Please try again.');
+                console.error('Redirect error:', error);
+            }
+        }
+
+        function showError(message) {
+            const errorElement = document.getElementById('error-notification');
+            errorElement.querySelector('p').innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + message;
+            errorElement.style.display = 'block';
+            
+            // Hide the error message after 5 seconds
+            setTimeout(() => {
+                errorElement.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

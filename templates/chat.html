@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitaHealthAI Chat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+       :root {
+    --primary-color: #4e8cff; /* Bright blue from image */
+    --primary-light: #6ba1ff;
+    --primary-dark: #3a7cef;
+    --secondary-color: #34c759;
+    --dark-bg: #06111f; /* Dark navy background */
+    --dark-card-bg: #0d1b2a; /* Slightly lighter navy for cards */
+    --light-text: #ffffff;
+    --transition: all 0.3s ease;
+    --chat-radius: 1.2rem;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.navbar {
+    background-color: var(--dark-bg); /* Dark navy instead of purple */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    padding: 0.8rem 0;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+    color: var(--light-text);
+}
+
+.navbar-brand span {
+    color: var(--primary-color);
+}
+
+.chat-container {
+    flex: 1;
+    padding: 2rem 0;
+}
+
+.chat-window {
+    height: 65vh;
+    overflow-y: auto;
+    padding: 1.5rem;
+    background-color: var(--dark-card-bg);
+    border-radius: var(--chat-radius);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-light) #1a2535;
+}
+
+.chat-window::-webkit-scrollbar {
+    width: 28px;
+}
+
+.chat-window::-webkit-scrollbar-track {
+    background: #1a2535;
+    border-radius: 10px;
+}
+
+.chat-window::-webkit-scrollbar-thumb {
+    background: var(--primary-light);
+    border-radius: 10px;
+}
+
+.message {
+    margin-bottom: 1.2rem;
+    padding: 1rem 1.2rem;
+    border-radius: var(--chat-radius);
+    max-width: 85%;
+    position: relative;
+    animation: fadeIn 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.user-message {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.bot-message {
+    background-color: #1e293b;
+    color: var(--light-text);
+    margin-right: auto;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.message-input {
+    background-color: var(--dark-card-bg);
+    border-radius: var(--chat-radius);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    padding: 1.2rem;
+    margin-top: 1.5rem;
+    transition: var(--transition);
+}
+
+.message-input:focus-within {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.form-control {
+    border: none;
+    border-radius: 50px;
+    padding: 0.8rem 1.2rem;
+    background-color: #1a2535;
+    color: var(--light-text);
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    box-shadow: none;
+    background-color: #253545;
+    border: 1px solid var(--primary-light);
+    color: var(--light-text);
+}
+
+.btn-send {
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border: none;
+    box-shadow: 0 4px 8px rgba(78, 140, 255, 0.3);
+    transition: var(--transition);
+}
+
+.btn-send:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(78, 140, 255, 0.4);
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+}
+
+.resources-section {
+    background-color: var(--dark-card-bg);
+    border-radius: var(--chat-radius);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.resource-card {
+    border: 1px solid #1e293b;
+    border-radius: 1rem;
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
+    transition: var(--transition);
+    background-color: #0f2132;
+}
+
+.resource-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    border-color: var(--primary-color);
+}
+
+.resource-card h5 {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.resource-card p {
+    color: #a9b5c7;
+}
+
+.resource-card .btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border: none;
+    border-radius: 50px;
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(78, 140, 255, 0.3);
+    transition: var(--transition);
+    color: white;
+}
+
+.resource-card .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(78, 140, 255, 0.4);
+}
+
+.typing-indicator {
+    display: none;
+    padding: 0.8rem 1.2rem;
+    background-color: #1e293b;
+    color: var(--light-text);
+    border-radius: var(--chat-radius);
+    margin-right: auto;
+    margin-bottom: 1.2rem;
+    width: fit-content;
+    animation: fadeIn 0.3s ease;
+}
+
+.dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #a9b5c7;
+    animation: wave 1.3s linear infinite;
+}
+
+.dot:nth-child(2) {
+    animation-delay: -1.1s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: -0.9s;
+}
+
+@keyframes wave {
+    0%, 60%, 100% { 
+        transform: translateY(0);
+    }
+    30% { 
+        transform: translateY(-6px);
+    }
+}
+
+.mood-tracker-btn {
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 50px;
+    padding: 0.5rem 1.2rem;
+    font-weight: 500;
+    color: white;
+    box-shadow: 0 4px 8px rgba(52, 199, 89, 0.3);
+    transition: var(--transition);
+}
+
+.mood-tracker-btn:hover {
+    background-color: #2da84e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(52, 199, 89, 0.4);
+}
+
+.resources-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #1e293b;
+    padding-bottom: 0.8rem;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    border-bottom: none;
+}
+
+.modal-content {
+    background-color: var(--dark-card-bg);
+    color: var(--light-text);
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-body, .modal-footer {
+    background-color: var(--dark-card-bg);
+    color: var(--light-text);
+}
+
+.form-range::-webkit-slider-thumb {
+    background: var(--primary-color);
+}
+
+.form-range::-moz-range-thumb {
+    background: var(--primary-color);
+}
+
+.form-range::-ms-thumb {
+    background: var(--primary-color);
+}
+
+#moodValueDisplay {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Feature cards styling to match the image */
+.feature-card {
+    background-color: var(--dark-card-bg);
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: var(--transition);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+
+.feature-card .icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.feature-card h3 {
+    color: var(--light-text);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    color: #a9b5c7;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border: none;
+    border-radius: 50px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 500;
+    box-shadow: 0 4px 8px rgba(78, 140, 255, 0.3);
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(78, 140, 255, 0.4);
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+}
+
+/* Hero section styling */
+.hero-section {
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.hero-section p {
+    color: #a9b5c7;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/"><i class="fas fa-brain me-2"></i>VitaHealth</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Chat</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn mood-tracker-btn" id="mood-tracker-btn">
+                            <i class="fas fa-chart-line me-2"></i>Track Mood
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chat Section -->
+    <section class="chat-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="chat-window" id="chatWindow">
+                        <div class="bot-message message">
+                            <p class="mb-0">Hi there! I'm VitaHealthAI, your mental health companion. How are you feeling today?</p>
+                        </div>
+                        <div class="typing-indicator" id="typingIndicator">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="message-input">
+                        <form id="chatForm">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="userMessage" placeholder="Type your message here..." aria-label="Your message">
+                                <button class="btn btn-send" type="submit">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+    <!-- Mood Tracker Modal -->
+    <div class="modal fade" id="moodTrackerModal" tabindex="-1" aria-labelledby="moodTrackerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="moodTrackerModalLabel"><i class="fas fa-smile me-2"></i>Track Your Mood</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="moodForm">
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">How are you feeling today?</label>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>1 (Very low)</span>
+                                <span>10 (Excellent)</span>
+                            </div>
+                            <input type="range" class="form-range" min="1" max="10" step="1" id="moodScore" value="5">
+                            <div class="text-center mt-3">
+                                <span id="moodValueDisplay">5</span> - <span id="moodLabel">Neutral</span>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="moodDescription" class="form-label fw-bold">What's contributing to your mood today? (Optional)</label>
+                            <textarea class="form-control" id="moodDescription" rows="3" placeholder="Share any thoughts or experiences..."></textarea>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Crisis Modal (Add this back) -->
+    <div class="modal fade" id="crisisModal" tabindex="-1" aria-labelledby="crisisModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="crisisModalLabel"><i class="fas fa-exclamation-triangle me-2"></i>Need Help Now?</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>If you're in crisis or need immediate support, please reach out to one of these resources:</p>
+                    <div class="list-group" id="crisisResourcesList">
+                        <!-- Crisis resources will be added here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const chatWindow = document.getElementById('chatWindow');
+    const chatForm = document.getElementById('chatForm');
+    const userMessageInput = document.getElementById('userMessage');
+    const typingIndicator = document.getElementById('typingIndicator');
+    const resourcesList = document.getElementById('resourcesList');
+    const moodTrackerBtn = document.getElementById('mood-tracker-btn');
+    const moodForm = document.getElementById('moodForm');
+    const moodScore = document.getElementById('moodScore');
+    const moodValueDisplay = document.getElementById('moodValueDisplay');
+    const moodLabel = document.getElementById('moodLabel');
+    
+    // Speech recognition setup
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    
+    // Text-to-speech setup
+    const speechSynthesis = window.speechSynthesis;
+    let speaking = false;
+    let audioEnabled = true;  // Track if audio is enabled
+
+    // Add speech toggle button to navbar
+    addSpeechToggle();
+    
+    // Add voice recording button to chat input
+    addVoiceButton();
+    
+    // Function to get or set session ID in cookie
+    function getSessionId() {
+        const cookieName = "session_id=";
+        const cookies = document.cookie.split(';');
+        for(let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.indexOf(cookieName) === 0) {
+                return cookie.substring(cookieName.length, cookie.length);
+            }
+        }
+        return null;
+    }
+    
+    function setSessionId(sessionId) {
+        // Set cookie to expire in 30 days
+        const expiryDate = new Date();
+        expiryDate.setDate(expiryDate.getDate() + 30);
+        document.cookie = `session_id=${sessionId}; expires=${expiryDate.toUTCString()}; path=/`;
+    }
+    
+    // Send message to chatbot API
+    async function sendMessage(message) {
+        // Add user message to chat
+        addMessageToChat(message, 'user');
+        
+        // Show typing indicator
+        typingIndicator.style.display = 'block';
+        
+        // Scroll to bottom
+        scrollToBottom();
+        
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: message })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            
+            const data = await response.json();
+            
+            // Hide typing indicator
+            typingIndicator.style.display = 'none';
+            
+            // Add bot message to chat
+            addMessageToChat(data.response, 'bot');
+            
+            // Speak the response if audio is enabled
+            if (audioEnabled) {
+                speakText(data.response);
+            }
+            
+            // Update resources
+            if (data.resources && data.resources.length > 0) {
+                updateResources(data.resources);
+            }
+            
+            // Save session ID if provided
+            if (data.session_id) {
+                setSessionId(data.session_id);
+            }
+            
+            // Check if crisis detected
+            if (data.is_crisis) {
+                showCrisisModal(data.resources);
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+            typingIndicator.style.display = 'none';
+        }
+        
+        // Scroll to bottom
+        scrollToBottom();
+    }
+    
+    // Add message to chat window
+    function addMessageToChat(message, sender) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+        
+        if (sender === 'user') {
+            messageElement.classList.add('user-message');
+        } else if (sender === 'bot') {
+            messageElement.classList.add('bot-message');
+        } else if (sender === 'system') {
+            messageElement.classList.add('system-message');
+            messageElement.style.backgroundColor = '#f8f9fa';
+            messageElement.style.color = '#6c757d';
+            messageElement.style.fontStyle = 'italic';
+        }
+        
+        // Convert URLs in bot messages to clickable links
+        if (sender === 'bot') {
+            message = message.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
+        }
+        
+        messageElement.innerHTML = `<p class="mb-0">${message}</p>`;
+        
+        // Add a speak button to bot messages
+        if (sender === 'bot') {
+            const speakButton = document.createElement('button');
+            speakButton.classList.add('btn-speak');
+            speakButton.innerHTML = '<i class="fas fa-volume-up"></i>';
+            speakButton.style.background = 'none';
+            speakButton.style.border = 'none';
+            speakButton.style.color = '#5856d6';
+            speakButton.style.fontSize = '0.8rem';
+            speakButton.style.padding = '0.2rem 0.5rem';
+            speakButton.style.marginTop = '0.5rem';
+            speakButton.style.cursor = 'pointer';
+            speakButton.style.display = audioEnabled ? 'block' : 'none';
+            
+            speakButton.addEventListener('click', function() {
+                speakText(message);
+            });
+            
+            messageElement.appendChild(speakButton);
+        }
+        
+        // Insert before typing indicator
+        chatWindow.insertBefore(messageElement, typingIndicator);
+    }
+    
+    // Scroll chat to bottom
+    function scrollToBottom() {
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+    
+    // Update resources section
+    function updateResources(resources) {
+        resourcesList.innerHTML = ''; // Clear current resources
+        
+        resources.forEach(resource => {
+            const resourceCard = document.createElement('div');
+            resourceCard.classList.add('resource-card');
+            
+            // Determine icon based on category or title
+            let icon = 'fas fa-heart';
+            if (resource.category === 'Crisis') {
+                icon = 'fas fa-phone';
+            } else if (resource.category === 'Self-help') {
+                icon = 'fas fa-hands-helping';
+            } else if (resource.title.toLowerCase().includes('breathing')) {
+                icon = 'fas fa-lungs';
+            } else if (resource.title.toLowerCase().includes('meditation')) {
+                icon = 'fas fa-peace';
+            }
+            
+            resourceCard.innerHTML = `
+                <h5><i class="${icon} me-2"></i>${resource.title}</h5>
+                <p class="mb-2">${resource.description}</p>
+                <a href="${resource.url}" class="btn btn-primary">${resource.url.startsWith('/') ? 'Start Now' : 'Visit'}</a>
+            `;
+            
+            resourcesList.appendChild(resourceCard);
+        });
+    }
+    
+    // Show crisis modal with resources
+    function showCrisisModal(resources) {
+        const crisisResourcesList = document.getElementById('crisisResourcesList');
+        crisisResourcesList.innerHTML = '';
+        
+        resources.forEach(resource => {
+            const item = document.createElement('a');
+            item.href = resource.url || `tel:${resource.phone.replace(/[^0-9]/g, '')}`;
+            item.classList.add('list-group-item', 'list-group-item-action');
+            
+            item.innerHTML = `
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">${resource.title}</h5>
+                </div>
+                <p class="mb-1">${resource.description}</p>
+                <small>${resource.phone || ''}</small>
+            `;
+            
+            crisisResourcesList.appendChild(item);
+        });
+        
+        // Show modal
+        const crisisModal = new bootstrap.Modal(document.getElementById('crisisModal'));
+        crisisModal.show();
+    }
+    
+    // Add speech toggle button to navbar
+    function addSpeechToggle() {
+        const navbarNav = document.getElementById('navbarNav');
+        const navList = navbarNav.querySelector('ul');
+        
+        const toggleItem = document.createElement('li');
+        toggleItem.className = 'nav-item ms-2';
+        
+        const toggleButton = document.createElement('button');
+        toggleButton.className = 'btn btn-outline-light';
+        toggleButton.id = 'speechToggle';
+        toggleButton.innerHTML = '<i class="fas fa-volume-up"></i> Audio On';
+        
+        toggleItem.appendChild(toggleButton);
+        navList.appendChild(toggleItem);
+        
+        toggleButton.addEventListener('click', function() {
+            audioEnabled = !audioEnabled;
+            
+            if (audioEnabled) {
+                toggleButton.innerHTML = '<i class="fas fa-volume-up"></i> Audio On';
+                document.querySelectorAll('.btn-speak').forEach(btn => {
+                    btn.style.display = 'block';
+                });
+                // Announce that audio is enabled
+                speakText("Audio is now enabled");
+            } else {
+                toggleButton.innerHTML = '<i class="fas fa-volume-mute"></i> Audio Off';
+                document.querySelectorAll('.btn-speak').forEach(btn => {
+                    btn.style.display = 'none';
+                });
+                // Stop any current speech
+                speechSynthesis.cancel();
+            }
+        });
+    }
+    
+    // Add voice recording button
+    function addVoiceButton() {
+        const inputGroup = document.querySelector('.input-group');
+        const voiceButton = document.createElement('button');
+        voiceButton.type = 'button';
+        voiceButton.className = 'btn btn-voice ms-2';
+        voiceButton.id = 'voiceButton';
+        voiceButton.innerHTML = '<i class="fas fa-microphone"></i>';
+        voiceButton.style = `
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #34c759, #2da84e);
+            border: none;
+            box-shadow: 0 4px 8px rgba(52, 199, 89, 0.3);
+            transition: all 0.3s ease;
+        `;
+        
+        // Insert voice button after input group
+        inputGroup.appendChild(voiceButton);
+        
+        // Add event listeners for voice button
+        voiceButton.addEventListener('click', toggleSpeechRecognition);
+    }
+    
+    // Toggle speech recognition on/off
+    function toggleSpeechRecognition() {
+        const voiceButton = document.getElementById('voiceButton');
+        
+        if (voiceButton.classList.contains('recording')) {
+            // Stop recording
+            recognition.stop();
+            voiceButton.classList.remove('recording');
+            voiceButton.innerHTML = '<i class="fas fa-microphone"></i>';
+            voiceButton.style.background = 'linear-gradient(135deg, #34c759, #2da84e)';
+        } else {
+            // Start recording
+            recognition.start();
+            voiceButton.classList.add('recording');
+            voiceButton.innerHTML = '<i class="fas fa-stop"></i>';
+            voiceButton.style.background = 'linear-gradient(135deg, #ff3b30, #dc3545)';
+            
+            // Show recording indication
+            addMessageToChat('Listening...', 'system');
+            scrollToBottom();
+        }
+    }
+    
+    // Handle speech recognition results
+    recognition.onresult = function(event) {
+        const voiceButton = document.getElementById('voiceButton');
+        const transcript = event.results[0][0].transcript;
+        
+        // Remove the "Listening..." message
+        const systemMessages = document.querySelectorAll('.system-message');
+        if (systemMessages.length > 0) {
+            systemMessages[systemMessages.length - 1].remove();
+        }
+        
+        // Fill the input field with the transcript
+        userMessageInput.value = transcript;
+        
+        // Reset the voice button
+        voiceButton.classList.remove('recording');
+        voiceButton.innerHTML = '<i class="fas fa-microphone"></i>';
+        voiceButton.style.background = 'linear-gradient(135deg, #34c759, #2da84e)';
+        
+        // Send the message
+        sendMessage(transcript);
+    };
+    
+    // Handle speech recognition errors
+    recognition.onerror = function(event) {
+        console.error('Speech recognition error:', event.error);
+        
+        // Remove the "Listening..." message
+        const systemMessages = document.querySelectorAll('.system-message');
+        if (systemMessages.length > 0) {
+            systemMessages[systemMessages.length - 1].remove();
+        }
+        
+        // Reset the voice button
+        const voiceButton = document.getElementById('voiceButton');
+        voiceButton.classList.remove('recording');
+        voiceButton.innerHTML = '<i class="fas fa-microphone"></i>';
+        voiceButton.style.background = 'linear-gradient(135deg, #34c759, #2da84e)';
+        
+        // Show error message
+        addMessageToChat('Sorry, I couldn\'t hear you. Please try again or type your message.', 'system');
+        scrollToBottom();
+    };
+    
+    // Speak text using speech synthesis
+    function speakText(text) {
+        // Cancel any current speech
+        if (speaking) {
+            speechSynthesis.cancel();
+        }
+        
+        // Clean the text - remove HTML tags and URLs
+        text = text.replace(/<[^>]*>?/gm, '');
+        text = text.replace(/(https?:\/\/[^\s]+)/g, 'link');
+        
+        const utterance = new SpeechSynthesisUtterance(text);
+        
+        // Set voice - try to find a female voice
+        const voices = speechSynthesis.getVoices();
+        const femaleVoice = voices.find(voice => 
+            voice.name.includes('female') || 
+            voice.name.includes('Samantha') || 
+            voice.name.includes('Google UK English Female'));
+        
+        if (femaleVoice) {
+            utterance.voice = femaleVoice;
+        }
+        
+        // Set properties
+        utterance.rate = 1.0;
+        utterance.pitch = 1.0;
+        utterance.volume = 1.0;
+        
+        // Track speaking state
+        speaking = true;
+        utterance.onend = function() {
+            speaking = false;
+        };
+        
+        // Speak
+        speechSynthesis.speak(utterance);
+    }
+    
+    // Mood tracker functionality
+    moodTrackerBtn.addEventListener('click', function() {
+        const moodTrackerModal = new bootstrap.Modal(document.getElementById('moodTrackerModal'));
+        moodTrackerModal.show();
+    });
+    
+    // Update mood value and label while sliding
+    moodScore.addEventListener('input', function() {
+        const value = this.value;
+        moodValueDisplay.textContent = value;
+        
+        // Update label based on value
+        if (value <= 2) {
+            moodLabel.textContent = "Very low";
+        } else if (value <= 4) {
+            moodLabel.textContent = "Low";
+        } else if (value <= 6) {
+            moodLabel.textContent = "Neutral";
+        } else if (value <= 8) {
+            moodLabel.textContent = "Good";
+        } else {
+            moodLabel.textContent = "Excellent";
+        }
+    });
+    
+    // Handle mood form submission
+    moodForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const score = moodScore.value;
+        const description = document.getElementById('moodDescription').value;
+        
+        try {
+            const response = await fetch('/api/mood', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 
+                    score: score,
+                    description: description,
+                    session_id: getSessionId()
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            
+            const data = await response.json();
+            
+            // Close the modal
+            const moodTrackerModal = bootstrap.Modal.getInstance(document.getElementById('moodTrackerModal'));
+            moodTrackerModal.hide();
+            
+            // Add system message about mood tracking
+            addMessageToChat('Mood recorded. Thank you for sharing how you\'re feeling today.', 'system');
+            
+            // Add AI response if provided
+            if (data.response) {
+                // Show typing indicator
+                typingIndicator.style.display = 'block';
+                scrollToBottom();
+                
+                // Wait a bit before showing the response
+                setTimeout(() => {
+                    typingIndicator.style.display = 'none';
+                    addMessageToChat(data.response, 'bot');
+                    
+                    // Speak the response if audio is enabled
+                    if (audioEnabled) {
+                        speakText(data.response);
+                    }
+                    
+                    scrollToBottom();
+                }, 1500);
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+            addMessageToChat("I'm having trouble recording your mood right now. Please try again later.", 'system');
+        }
+    });
+    
+    // Chat form submission
+    chatForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const message = userMessageInput.value.trim();
+        
+        if (message !== '') {
+            sendMessage(message);
+            userMessageInput.value = '';
+        }
+    });
+    
+    // Initialize with sample resources
+    const initialResources = [
+        {
+            title: '5-Minute Breathing Exercise',
+            description: 'A quick breathing technique to help reduce stress and anxiety.',
+            url: '/exercises/breathing',
+            category: 'Self-help'
+        },
+        {
+            title: 'Mental Health Resources',
+            description: 'Find professional mental health services in your area.',
+            url: 'https://www.mentalhealthresources.org',
+            category: 'Professional'
+        },
+        {
+            title: 'Guided Meditation',
+            description: '10-minute guided meditation for relaxation and mindfulness.',
+            url: '/exercises/meditation',
+            category: 'Self-help'
+        }
+    ];
+    
+    updateResources(initialResources);
+    
+    // Handle voices loading for speech synthesis
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = function() {
+            // Voices are now loaded
+            console.log('Voices loaded:', speechSynthesis.getVoices().length);
+        };
+    }
+});
+
+    </script>
+</body>
+</html>

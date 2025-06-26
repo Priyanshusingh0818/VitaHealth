@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Information Scanner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    :root {
+    --primary: #4895ef;
+    --primary-light: #4cc9f0;
+    --primary-dark: #3a0ca3;
+    --secondary: #4cc9f0;
+    --accent: #f72585;
+    --dark: #051127;
+    --navy-dark: #0a1324;
+    --navy-darker: #05081a;
+    --gray: #8d99ae;
+    --light-gray: #edf2f4;
+    --white: #ffffff;
+    --blue-accent: #4e92f9;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-large: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--navy-darker);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+    background-color: var(--navy-darker);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.app-title {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #4e92f9, #7babff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.app-description {
+    color: var(--white);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.card {
+    background: var(--navy-dark);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(78, 146, 249, 0.1);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-large);
+    transform: translateY(-5px);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.card-icon {
+    background: var(--blue-accent);
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.card-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--white);
+    text-align: center;
+}
+
+.upload-area {
+    border: 2px dashed rgba(78, 146, 249, 0.3);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: var(--navy-dark);
+}
+
+.upload-area:hover {
+    border-color: var(--blue-accent);
+    background-color: rgba(78, 146, 249, 0.05);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: var(--blue-accent);
+    margin-bottom: 1rem;
+}
+
+.upload-text {
+    font-size: 1.1rem;
+    color: var(--white);
+}
+
+.upload-btn {
+    display: inline-block;
+    color: var(--blue-accent);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#medicine-image {
+    display: none;
+}
+
+button, .click-me-btn {
+    background: var(--blue-accent);
+    color: white;
+    border: none;
+    border-radius: 24px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(78, 146, 249, 0.3);
+    width: auto;
+    display: inline-block;
+    text-align: center;
+}
+
+button:hover, .click-me-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(78, 146, 249, 0.4);
+    background: #5a9aff;
+}
+
+.loading-container {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1rem;
+    border: 5px solid rgba(78, 146, 249, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--blue-accent);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.results-container {
+    display: none;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.info-item {
+    background: var(--navy-dark);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    border-left: 4px solid var(--blue-accent);
+}
+
+.info-title {
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.info-content {
+    color: var(--light-gray);
+    font-size: 0.95rem;
+}
+
+.feature-card {
+    background: var(--navy-dark);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: var(--blue-accent);
+    margin-bottom: 1rem;
+}
+
+.feature-description {
+    color: var(--light-gray);
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.tab {
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--gray);
+    position: relative;
+    margin-right: 1rem;
+}
+
+.tab.active {
+    color: var(--blue-accent);
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--blue-accent);
+    border-radius: 3px 3px 0 0;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.chat-container {
+    display: none;
+    height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(78, 146, 249, 0.2);
+    background: var(--navy-dark);
+}
+
+.chat-messages {
+    height: 330px;
+    overflow-y: auto;
+    padding: 1.5rem;
+    background: var(--navy-dark);
+}
+
+.message {
+    max-width: 80%;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    position: relative;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.user-message {
+    background: var(--blue-accent);
+    color: white;
+    margin-left: auto;
+    border-radius: 12px 12px 0 12px;
+}
+
+.bot-message {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border-radius: 12px 12px 12px 0;
+}
+
+.chat-input-container {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+    background: var(--navy-dark);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#chat-input {
+    flex: 1;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1rem;
+    border-radius: 24px;
+    font-size: 0.95rem;
+    margin-right: 0.8rem;
+    color: var(--white);
+}
+
+#chat-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(78, 146, 249, 0.2);
+}
+
+#send-btn {
+    width: auto;
+    padding: 0.6rem 1.2rem;
+    border-radius: 24px;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    background: var(--navy-dark);
+    border-radius: 8px;
+    box-shadow: var(--shadow-large);
+    display: flex;
+    align-items: center;
+    transform: translateX(150%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    color: var(--white);
+    border: 1px solid rgba(78, 146, 249, 0.2);
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification-icon {
+    margin-right: 1rem;
+    color: var(--blue-accent);
+}
+
+.notification-text {
+    font-weight: 500;
+}
+
+.medicine-preview {
+    display: none;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.medicine-image {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.section-title {
+    text-align: center;
+    color: var(--white);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.welcome-text {
+    text-align: center;
+    color: var(--light-gray);
+    font-size: 1rem;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        padding: 1rem;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .card {
+        padding: 1.5rem;
+    }
+    
+    .app-title {
+        font-size: 1.8rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1 class="app-title">MediScan Pro</h1>
+            <p class="app-description">Scan medicine packaging and get detailed information, dosage instructions, and expert advice in seconds</p>
+        </header>
+
+        <div class="card" id="upload-card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M19.5 8.25l-7.5 7.5-7.5-7.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="white"/>
+                    </svg>
+                </div>
+                <h2 class="card-title">Upload Medicine Image</h2>
+            </div>
+
+            <div class="upload-area" id="drop-area">
+                <div class="upload-icon">📷</div>
+                <p class="upload-text">Drag and drop an image of medicine packaging</p>
+                <p>or <span class="upload-btn" id="select-file-btn">browse files</span></p>
+                <input type="file" id="medicine-image" accept="image/*">
+            </div>
+
+            <div class="medicine-preview" id="preview-container">
+                <img id="preview-image" class="medicine-image" alt="Medicine preview">
+                <p id="file-name" style="margin-top: 0.5rem; color: var(--gray);"></p>
+            </div>
+
+            <button id="analyze-btn">Analyze Medicine</button>
+        </div>
+
+        <div class="loading-container" id="loading">
+            <div class="spinner"></div>
+            <p>Analyzing medicine information...</p>
+            <p style="color: var(--gray); margin-top: 0.5rem; font-size: 0.9rem;">This may take a moment while we process your image</p>
+        </div>
+
+        <div class="results-container" id="results">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="white"/>
+                        </svg>
+                    </div>
+                    <h2 class="card-title">Medicine Information</h2>
+                </div>
+
+                <div class="tabs">
+                    <div class="tab active" data-tab="basic">Basic Information</div>
+                    <div class="tab" data-tab="detailed">Detailed Information</div>
+                </div>
+
+                <div class="tab-content active" id="basic-tab">
+                    <div class="info-grid" id="package-info">
+                        <!-- Basic medicine information will be displayed here -->
+                    </div>
+                </div>
+
+                <div class="tab-content" id="detailed-tab">
+                    <div class="info-grid" id="detailed-info">
+                        <!-- Detailed medicine information will be displayed here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="white"/>
+                        </svg>
+                    </div>
+                    <h2 class="card-title">Ask About This Medicine</h2>
+                </div>
+
+                <div class="chat-container" id="chatbot">
+                    <div class="chat-messages" id="chat-messages">
+                        <!-- Chat messages will appear here -->
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" id="chat-input" placeholder="Ask a question about this medicine...">
+                        <button id="send-btn">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="notification" id="notification">
+            <div class="notification-icon">⚠️</div>
+            <div class="notification-text">Notification message</div>
+        </div>
+    </div>
+
+    <script>
+        // Elements
+        // Elements
+const dropArea = document.getElementById('drop-area');
+const fileInput = document.getElementById('medicine-image');
+const selectFileBtn = document.getElementById('select-file-btn');
+const analyzeBtn = document.getElementById('analyze-btn');
+const previewContainer = document.getElementById('preview-container');
+const previewImage = document.getElementById('preview-image');
+const fileName = document.getElementById('file-name');
+const loadingSection = document.getElementById('loading');
+const resultsSection = document.getElementById('results');
+const packageInfoSection = document.getElementById('package-info');
+const detailedInfoSection = document.getElementById('detailed-info');
+const tabs = document.querySelectorAll('.tab');
+const tabContents = document.querySelectorAll('.tab-content');
+const notification = document.getElementById('notification');
+const notificationText = document.querySelector('.notification-text');
+const chatContainer = document.getElementById('chatbot');
+const chatMessages = document.getElementById('chat-messages');
+const chatInput = document.getElementById('chat-input');
+const sendBtn = document.getElementById('send-btn');
+
+// Store medicine data
+let medicineData = null;
+
+// File selection via button - fixed event listener
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("Document loaded, setting up event listeners");
+    
+    // Make sure the file input is accessible but hidden
+    if (fileInput) {
+        fileInput.style.display = 'none';
+        fileInput.style.position = 'absolute';
+        fileInput.style.left = '-9999px';
+        console.log("File input configured");
+    } else {
+        console.error("File input element not found!");
+    }
+    
+    // Set up click handler for the browse button
+    if (selectFileBtn) {
+        selectFileBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log("Browse button clicked");
+            if (fileInput) {
+                fileInput.click();
+            }
+        });
+        console.log("Select file button handler added");
+    } else {
+        console.error("Select file button not found!");
+    }
+});
+
+// Display preview when file is selected
+fileInput.addEventListener('change', function(e) {
+    console.log("File input changed");
+    handleFileSelect();
+});
+
+// Drag and drop functionality
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropArea.addEventListener(eventName, preventDefaults, false);
+});
+
+['dragenter', 'dragover'].forEach(eventName => {
+    dropArea.addEventListener(eventName, highlight, false);
+});
+
+['dragleave', 'drop'].forEach(eventName => {
+    dropArea.addEventListener(eventName, unhighlight, false);
+});
+
+dropArea.addEventListener('drop', handleDrop, false);
+
+// Tab switching
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        // Remove active class from all tabs
+        tabs.forEach(t => t.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        // Add active class to clicked tab and corresponding content
+        tab.classList.add('active');
+        document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
+    });
+});
+
+// Analyze button
+analyzeBtn.addEventListener('click', analyzeImage);
+
+// Prevent default drag behaviors
+function preventDefaults(e) {
+    e.preventDefault();
+    e.stopPropagation();
+}
+
+// Highlight drop area when dragging over
+function highlight() {
+    dropArea.style.borderColor = 'var(--primary)';
+    dropArea.style.backgroundColor = 'rgba(67, 97, 238, 0.05)';
+}
+
+// Remove highlight
+function unhighlight() {
+    dropArea.style.borderColor = '#edf2f4';
+    dropArea.style.backgroundColor = 'transparent';
+}
+
+// Handle dropped files
+function handleDrop(e) {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    
+    if (files.length > 0) {
+        fileInput.files = files;
+        handleFileSelect();
+    }
+}
+
+// Handle file selection
+function handleFileSelect() {
+    console.log("Handling file selection");
+    const file = fileInput.files[0];
+    
+    if (file) {
+        console.log("File selected:", file.name);
+        // Display preview
+        previewContainer.style.display = 'block';
+        fileName.textContent = file.name;
+        
+        // Create preview
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImage.src = e.target.result;
+            console.log("Preview image loaded");
+        }
+        reader.readAsDataURL(file);
+    } else {
+        console.log("No file selected");
+    }
+}
+
+// Show notification
+function showNotification(message, duration = 3000) {
+    notificationText.textContent = message;
+    notification.classList.add('show');
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, duration);
+}
+
+// Analyze image
+async function analyzeImage() {
+    console.log("Analyze button clicked");
+    const file = fileInput.files[0];
+    
+    if (!file) {
+        showNotification('Please select an image first');
+        return;
+    }
+    
+    // Show loading state
+    loadingSection.style.display = 'block';
+    resultsSection.style.display = 'none';
+    
+    try {
+        console.log("Preparing to send image for analysis");
+        const formData = new FormData();
+        formData.append('image', file);
+        
+        const response = await fetch('/analyze', {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (!response.ok) {
+            throw new Error('Analysis failed: ' + response.statusText);
+        }
+        
+        medicineData = await response.json();
+        console.log("Analysis complete:", medicineData);
+        
+        // Populate the results
+        displayResults(medicineData);
+        
+        // Show results and chatbot
+        loadingSection.style.display = 'none';
+        resultsSection.style.display = 'block';
+        chatContainer.style.display = 'block';
+        
+        // Initialize chatbot
+        initializeChatbot(medicineData);
+        
+    } catch (error) {
+        console.error('Error:', error);
+        loadingSection.style.display = 'none';
+        showNotification('Error analyzing medicine: ' + error.message);
+    }
+}
+
+// Display results in the UI
+function displayResults(data) {
+    // Clear previous results
+    packageInfoSection.innerHTML = '';
+    detailedInfoSection.innerHTML = '';
+    
+    // Display basic package information
+    if (data['Medicine Name']) {
+        addInfoItem(packageInfoSection, 'Medicine Name', `
+            <div>Brand Name: ${data['Medicine Name']['Brand Name'] || 'Not found'}</div>
+            <div>Generic Name: ${data['Medicine Name']['Generic Name'] || 'Not found'}</div>
+        `);
+    }
+    
+    addInfoItem(packageInfoSection, 'Composition', formatValue(data['Composition']));
+    addInfoItem(packageInfoSection, 'Manufacturer', formatValue(data['Manufacturer Information']));
+    addInfoItem(packageInfoSection, 'Manufacturing Date', formatValue(data['Manufacturing Date']));
+    addInfoItem(packageInfoSection, 'Expiry Date', formatValue(data['Expiry Date']));
+    
+    // Display detailed information
+    addInfoItem(detailedInfoSection, 'Description', formatValue(data['Description']));
+    addInfoItem(detailedInfoSection, 'Storage Instructions', formatValue(data['Storage Instructions']));
+    addInfoItem(detailedInfoSection, 'Usage Instructions', formatValue(data['Usage Instructions']));
+    addInfoItem(detailedInfoSection, 'Warnings & Cautions', formatValue(data['Warnings/Cautions']));
+    addInfoItem(detailedInfoSection, 'Side Effects', formatValue(data['Side Effects']));
+    addInfoItem(detailedInfoSection, 'Dosage Information', formatValue(data['Dosage Information']));
+    addInfoItem(detailedInfoSection, 'Dietary Recommendations', formatValue(data['Dietary Recommendations']));
+    addInfoItem(detailedInfoSection, 'Drug Interactions', formatValue(data['Drug Interactions']));
+}
+
+// Add info item to section
+function addInfoItem(section, title, content) {
+    const item = document.createElement('div');
+    item.className = 'info-item';
+    
+    item.innerHTML = `
+        <div class="info-title">${title}</div>
+        <div class="info-content">${content}</div>
+    `;
+    
+    section.appendChild(item);
+}
+
+// Format value for display
+function formatValue(value) {
+    if (!value) return 'Not provided';
+    
+    if (typeof value === 'object' && value !== null) {
+        return JSON.stringify(value, null, 2)
+            .replace(/[\{\}"]/g, '')
+            .replace(/,/g, '<br>')
+            .replace(/:/g, ': ');
+    }
+    
+    return value;
+}
+
+// Initialize chatbot
+function initializeChatbot(medicineData) {
+    // Clear previous messages
+    chatMessages.innerHTML = '';
+    
+    // Add welcome message
+    let medicineName = 'this medicine';
+    if (medicineData['Medicine Name'] && medicineData['Medicine Name']['Brand Name']) {
+        medicineName = medicineData['Medicine Name']['Brand Name'];
+    }
+    
+    addBotMessage(`Hello! I'm MediScan Assistant. Ask me anything about ${medicineName} and I'll help you understand the medication better.`);
+    
+    // Chat functionality
+    sendBtn.addEventListener('click', sendChatMessage);
+    chatInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendChatMessage();
+        }
+    });
+}
+
+// Send chat message
+async function sendChatMessage() {
+    const message = chatInput.value.trim();
+    if (!message) return;
+    
+    // Add user message to chat
+    addUserMessage(message);
+    chatInput.value = '';
+    
+    try {
+        const response = await fetch('/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                message: message,
+                medicine_info: medicineData
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error('Chat request failed');
+        }
+        
+        const data = await response.json();
+        addBotMessage(data.response);
+        
+    } catch (error) {
+        console.error('Error:', error);
+        addBotMessage("I'm sorry, I encountered an error while processing your question. Please try again.");
+    }
+}
+
+// Add user message to chat
+function addUserMessage(text) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message user-message';
+    messageDiv.textContent = text;
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// Add bot message to chat
+function addBotMessage(text) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message bot-message';
+    messageDiv.innerHTML = text.replace(/\n/g, '<br>');
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// Add debug logging when page loads
+console.log("Script loaded and running");
+    </script>
+</body>
+</html>

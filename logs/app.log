@@ -1,0 +1,16 @@
+2025-04-22 22:07:36,915 - app - INFO - Application starting
+2025-04-22 22:07:37,458 - app - INFO - Application starting
+2025-04-22 22:07:40,483 - app - INFO - Home page accessed
+2025-04-22 22:07:40,930 - app - WARNING - Page not found: /favicon.ico
+2025-04-22 22:07:42,729 - app - INFO - Redirecting to brain tumor diagnosis
+2025-04-22 22:07:47,438 - app - INFO - Redirecting to lung cancer diagnosis
+2025-04-22 22:07:55,118 - app - INFO - Redirecting to diet service
+2025-04-22 22:07:58,804 - app - INFO - Redirecting to chat service
+2025-04-22 22:08:08,344 - app - INFO - Redirecting to medicine service
+2019-01-24 14:11:42,898 - app - INFO - Application starting
+2019-01-24 14:11:43,430 - app - INFO - Application starting
+2019-01-24 14:11:47,689 - app - INFO - Home page accessed
+2019-01-24 14:11:50,395 - app - WARNING - Page not found: /favicon.ico
+2019-01-24 14:23:01,821 - app - INFO - Home page accessed
+2019-01-24 14:23:04,184 - app - WARNING - Page not found: /favicon.ico
+2019-01-24 14:28:28,951 - app - INFO - Application starting

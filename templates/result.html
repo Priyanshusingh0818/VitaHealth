@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Diet Plan - Diet Planner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <style>
+       body {
+    font-family: 'Inter', sans-serif;
+    background-color: #050e1f; /* Dark navy blue background */
+    color: #ffffff; /* White text */
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.header {
+    background: #092044; /* Dark blue header */
+    color: white;
+    padding: 1.5rem 0;
+    border-radius: 0 0 15px 15px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border: none;
+    margin-bottom: 2rem;
+    background-color: #061330; /* Dark blue card background */
+    color: #ffffff;
+}
+
+.plan-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.btn-primary {
+    background: #4c88ff; /* Light blue button */
+    border: none;
+    padding: 10px 25px;
+    font-weight: 600;
+    border-radius: 50px; /* Rounded buttons */
+}
+
+.btn-primary:hover {
+    background: #3a6fd9; /* Slightly darker blue on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-outline-primary {
+    color: #4c88ff; /* Light blue text */
+    border-color: #4c88ff;
+    border-radius: 50px; /* Rounded buttons */
+}
+
+.btn-outline-primary:hover {
+    background-color: #4c88ff;
+    color: white;
+}
+
+.card-header {
+    background: #0d2452; /* Slightly lighter blue header */
+    border-radius: 15px 15px 0 0 !important;
+    border-bottom: none;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.meal-card {
+    border-radius: 10px;
+    border: 1px solid #1a3365;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #061330;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #ffffff;
+}
+
+.meal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(76, 136, 255, 0.2);
+}
+
+.meal-title {
+    font-weight: 600;
+    color: #4c88ff; /* Light blue text */
+    margin-bottom: 8px;
+}
+
+.calories {
+    font-weight: 600;
+    color: #4cda8f; /* Green text */
+}
+
+.day-tabs .nav-link {
+    border-radius: 10px;
+    margin-right: 5px;
+    color: #ffffff;
+    background-color: #0d2452;
+    transition: all 0.3s ease;
+}
+
+.day-tabs .nav-link.active {
+    background-color: #4c88ff; /* Light blue active tab */
+    color: white;
+    border-color: #4c88ff;
+}
+
+.user-info {
+    background-color: #0d2452;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.download-section {
+    background: #0d2452;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.nutritional-notes {
+    font-style: italic;
+    background-color: #0d2452;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.day-summary {
+    background-color: #0d2452;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.chart-container {
+    position: relative;
+    height: 250px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.progress {
+    height: 12px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    background-color: #061330;
+}
+
+.progress-bar {
+    background-color: #4c88ff; /* Light blue progress */
+}
+
+.progress-container {
+    margin-bottom: 15px;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+    color: #ffffff;
+}
+
+.macros-chart-container {
+    width: 100%;
+    height: 200px;
+    margin: 20px 0;
+}
+
+.nutrition-badge {
+    background-color: #0d2452;
+    border-radius: 50px;
+    padding: 5px 15px;
+    margin: 5px;
+    font-size: 0.9rem;
+    display: inline-block;
+    color: #ffffff;
+    border: 1px solid #1a3365;
+}
+
+.timeline {
+    position: relative;
+    margin: 30px 0;
+}
+
+.timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -2px;
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(to bottom, #4c88ff, #6a75e0);
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.timeline-content {
+    position: relative;
+    background: #0d2452;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    color: #ffffff;
+}
+
+.timeline-content:hover {
+    transform: translateY(-3px);
+}
+
+.timeline-point {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+    border-radius: 50%;
+    background: #061330;
+    border: 4px solid #4c88ff; /* Light blue border */
+    z-index: 1;
+}
+
+.timeline-left {
+    margin-right: 50%;
+    padding-right: 30px;
+}
+
+.timeline-right {
+    margin-left: 50%;
+    padding-left: 30px;
+}
+
+.meal-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #4c88ff; /* Light blue icon background */
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.water-tracker {
+    background-color: #0d2452;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.water-glass {
+    display: inline-block;
+    width: 30px;
+    height: 40px;
+    background-color: #4c88ff; /* Light blue water glass */
+    border-radius: 5px 5px 0 0;
+    margin: 0 5px;
+    position: relative;
+    opacity: 0.3;
+}
+
+.water-glass.filled {
+    opacity: 1;
+}
+
+.nutrient-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.nutrient-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    background-color: #4c88ff; /* Light blue icon */
+}
+
+.print-friendly {
+    display: none;
+}
+
+@media print {
+    .print-friendly {
+        display: block;
+    }
+    .no-print {
+        display: none !important;
+    }
+    body {
+        background: white;
+        font-size: 12pt;
+        color: #000000;
+    }
+    .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        background: white;
+        color: #000000;
+    }
+    .header {
+        background: #4c88ff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+.meal-nutrition-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.meal-nutrition-badge {
+    background-color: #0d2452;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 0.8rem;
+}
+
+.badge-protein { border-left: 3px solid #ff6b6b; }
+.badge-carbs { border-left: 3px solid #48dbfb; }
+.badge-fat { border-left: 3px solid #feca57; }
+.badge-fiber { border-left: 3px solid #1dd1a1; }
+
+.achievement-card {
+    background: #0d2452;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.achievement-card:hover {
+    transform: translateY(-5px);
+}
+
+.achievement-icon {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #4c88ff; /* Light blue icon */
+}
+
+.calendar-container {
+    margin: 20px 0;
+}
+
+.calendar-day {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 3px;
+    font-size: 0.9rem;
+    border: 1px solid #1a3365;
+    cursor: pointer;
+    background-color: #0d2452;
+    color: #ffffff;
+}
+
+.calendar-day.active {
+    background-color: #4c88ff; /* Light blue active day */
+    color: white;
+    border-color: #4c88ff;
+}
+
+.calendar-day.completed {
+    background-color: #4cda8f; /* Green completed day */
+    color: white;
+    border-color: #4cda8f;
+}
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1>Your 7-Day Diet Plan</h1>
+            <p class="lead">Personalized nutrition tailored just for you</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="plan-container">
+            <!-- Download Section -->
+            <div class="download-section">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h4>Take your personalized diet plan with you!</h4>
+                        <p>Download a formatted PDF with your complete 7-day meal plan, nutrition analytics, and progress tracking tools</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <a href="/download_pdf?name={{ user_info.name | urlencode }}&age={{ user_info.age | urlencode }}&weight={{ user_info.weight | urlencode }}&height={{ user_info.height | urlencode }}&gender={{ user_info.gender | urlencode }}&bmi={{ user_info.bmi | urlencode }}&activity_level={{ user_info.activity_level | urlencode }}&dietary_preferences={{ user_info.dietary_preferences | urlencode }}&allergies={{ user_info.allergies | urlencode }}&goals={{ user_info.goals | urlencode }}&plan={{ plan | tojson | urlencode }}" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-pdf me-2" viewBox="0 0 16 16">
+                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                <path d="M4.603 14.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.697 19.697 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.188-.012.396-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.066.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.712 5.712 0 0 1-.911-.95 11.651 11.651 0 0 0-1.997.406 11.307 11.307 0 0 1-1.02 1.51c-.292.35-.609.656-.927.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.266.266 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.71 12.71 0 0 1 1.01-.193 11.744 11.744 0 0 1-.51-.858 20.801 20.801 0 0 1-.5 1.05zm2.446.45c.15.163.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.876 3.876 0 0 0-.612-.053zM8.078 7.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z"/>
+                            </svg>
+                            Download PDF
+                        </a>
+                        <button class="btn btn-outline-primary mt-2" onclick="window.print()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer me-2" viewBox="0 0 16 16">
+                                <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                                <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+                            </svg>
+                            Print Plan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Print Header for PDF -->
+            <div class="print-friendly text-center mb-4">
+                <h1>7-Day Diet Plan for {{ user_info.name }}</h1>
+                <p>Generated on {{ dates[0] }}</p>
+                <hr>
+            </div>
+
+            <!-- User Information & BMI Card -->
+            <div class="card mb-4">
+                <div class="card-header py-3">
+                    Your Information
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <p><strong>Name:</strong> {{ user_info.name }}</p>
+                            <p><strong>Age:</strong> {{ user_info.age }} years</p>
+                            <p><strong>Weight:</strong> {{ user_info.weight }} kg</p>
+                            <p><strong>Height:</strong> {{ user_info.height }} cm</p>
+                            <p><strong>BMI:</strong> {{ user_info.bmi }}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p><strong>Gender:</strong> {{ user_info.gender }}</p>
+                            <p><strong>Activity Level:</strong> {{ user_info.activity_level }}</p>
+                            <p><strong>Dietary Preferences:</strong> {{ user_info.dietary_preferences }}</p>
+                            <p><strong>Allergies:</strong> {{ user_info.allergies or 'None specified' }}</p>
+                            <p><strong>Goals:</strong> {{ user_info.goals }}</p>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <div class="chart-container" style="height: 180px;">
+                                    <canvas id="bmiChart"></canvas>
+                                </div>
+                                <small>Your BMI: <strong>{{ user_info.bmi }}</strong></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nutrition Overview Card -->
+            <div class="card mb-4">
+                <div class="card-header py-3">
+                    Nutrition Overview
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>{{ plan.plan_overview }}</p>
+                            {% if plan.calorie_target %}
+                            <p><strong>Daily Calorie Target:</strong> {{ plan.calorie_target }}</p>
+                            {% endif %}
+                            
+                            <div class="progress-container">
+                                <div class="progress-label">
+                                    <span>Protein</span>
+                                    <span>30%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 30%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="progress-container">
+                                <div class="progress-label">
+                                    <span>Carbohydrates</span>
+                                    <span>45%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 45%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="progress-container">
+                                <div class="progress-label">
+                                    <span>Fat</span>
+                                    <span>25%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 25%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="chart-container">
+                                <canvas id="macrosChart"></canvas>
+                            </div>
+                            <div class="text-center mt-2">
+                                <span class="nutrition-badge">Protein: 30%</span>
+                                <span class="nutrition-badge">Carbs: 45%</span>
+                                <span class="nutrition-badge">Fat: 25%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calorie Pattern Chart -->
+            <div class="card mb-4">
+                <div class="card-header py-3">
+                    Weekly Calorie Pattern
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="calorieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Plans -->
+            <div class="card">
+                <div class="card-header py-3">
+                    7-Day Meal Plan
+                </div>
+                <div class="card-body">
+                    <!-- Day Tabs -->
+                    <ul class="nav nav-pills mb-4 day-tabs no-print" id="dayTabs" role="tablist">
+                        {% for day_plan in plan.daily_plans %}
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link {% if loop.index == 1 %}active{% endif %}" 
+                                id="day{{ loop.index }}-tab" 
+                                data-bs-toggle="pill" 
+                                data-bs-target="#day{{ loop.index }}" 
+                                type="button" 
+                                role="tab" 
+                                aria-controls="day{{ loop.index }}" 
+                                aria-selected="{% if loop.index == 1 %}true{% else %}false{% endif %}">
+                                {{ day_plan.day }}
+                            </button>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content" id="dayTabsContent">
+                        {% for day_plan in plan.daily_plans %}
+<div class="tab-pane fade {% if loop.index == 1 %}show active{% endif %}" 
+    id="day{{ loop.index }}" 
+    role="tabpanel" 
+    aria-labelledby="day{{ loop.index }}-tab">
+    
+    <h4 class="mb-3">{{ day_plan.day }} - {{ dates[loop.index0] }}</h4>
+    
+    <!-- Daily Nutrient Distribution Chart -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="chart-container">
+                <canvas id="nutrientChart{{ loop.index }}"></canvas>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Day Summary</h5>
+                    <p><strong>Total Calories:</strong> {{ day_plan.total_calories }}</p>
+                    
+                    <!-- Water Tracker -->
+                    <div class="water-tracker">
+                        <h6>Water Intake: {{ day_plan.hydration }}</h6>
+                        <div class="water-glasses">
+                            {% for i in range(8) %}
+                            <div class="water-glass {% if i < 6 %}filled{% endif %}"></div>
+                            {% endfor %}
+                        </div>
+                        <small class="text-muted">Target: 8 glasses (2L)</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Meal Timeline -->
+    <div class="timeline">
+        <!-- Breakfast -->
+        {% if day_plan.meals.breakfast %}
+        <div class="timeline-item">
+            <div class="timeline-point"></div>
+            <div class="timeline-content timeline-left">
+                <div class="meal-icon">🍳</div>
+                <h5 class="meal-title">Breakfast (8:00 AM)</h5>
+                <p><strong>{{ day_plan.meals.breakfast.name }}</strong></p>
+                <p>{{ day_plan.meals.breakfast.description }}</p>
+                <p class="calories">{{ day_plan.meals.breakfast.calories }} calories</p>
+                <div class="meal-nutrition-info">
+                    <span class="meal-nutrition-badge badge-protein">Protein: 20g</span>
+                    <span class="meal-nutrition-badge badge-carbs">Carbs: 35g</span>
+                    <span class="meal-nutrition-badge badge-fat">Fat: 15g</span>
+                    <span class="meal-nutrition-badge badge-fiber">Fiber: 5g</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Morning Snack -->
+        {% if day_plan.meals.morning_snack %}
+        <div class="timeline-item">
+            <div class="timeline-point"></div>
+            <div class="timeline-content timeline-right">
+                <div class="meal-icon">🍎</div>
+                <h5 class="meal-title">Morning Snack (10:30 AM)</h5>
+                <p><strong>{{ day_plan.meals.morning_snack.name }}</strong></p>
+                <p>{{ day_plan.meals.morning_snack.description }}</p>
+                <p class="calories">{{ day_plan.meals.morning_snack.calories }} calories</p>
+                <div class="meal-nutrition-info">
+                    <span class="meal-nutrition-badge badge-protein">Protein: 5g</span>
+                    <span class="meal-nutrition-badge badge-carbs">Carbs: 22g</span>
+                    <span class="meal-nutrition-badge badge-fat">Fat: 3g</span>
+                    <span class="meal-nutrition-badge badge-fiber">Fiber: 3g</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Lunch -->
+        {% if day_plan.meals.lunch %}
+        <div class="timeline-item">
+            <div class="timeline-point"></div>
+            <div class="timeline-content timeline-left">
+                <div class="meal-icon">🥗</div>
+                <h5 class="meal-title">Lunch (1:00 PM)</h5>
+                <p><strong>{{ day_plan.meals.lunch.name }}</strong></p>
+                <p>{{ day_plan.meals.lunch.description }}</p>
+                <p class="calories">{{ day_plan.meals.lunch.calories }} calories</p>
+                <div class="meal-nutrition-info">
+                    <span class="meal-nutrition-badge badge-protein">Protein: 25g</span>
+                    <span class="meal-nutrition-badge badge-carbs">Carbs: 40g</span>
+                    <span class="meal-nutrition-badge badge-fat">Fat: 12g</span>
+                    <span class="meal-nutrition-badge badge-fiber">Fiber: 8g</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Afternoon Snack -->
+        {% if day_plan.meals.afternoon_snack %}
+        <div class="timeline-item">
+            <div class="timeline-point"></div>
+            <div class="timeline-content timeline-right">
+                <div class="meal-icon">🥜</div>
+                <h5 class="meal-title">Afternoon Snack (4:00 PM)</h5>
+                <p><strong>{{ day_plan.meals.afternoon_snack.name }}</strong></p>
+                <p>{{ day_plan.meals.afternoon_snack.description }}</p>
+                <p class="calories">{{ day_plan.meals.afternoon_snack.calories }} calories</p>
+                <div class="meal-nutrition-info">
+                    <span class="meal-nutrition-badge badge-protein">Protein: 8g</span>
+                    <span class="meal-nutrition-badge badge-carbs">Carbs: 15g</span>
+                    <span class="meal-nutrition-badge badge-fat">Fat: 9g</span>
+                    <span class="meal-nutrition-badge badge-fiber">Fiber: 3g</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Dinner -->
+        {% if day_plan.meals.dinner %}
+        <div class="timeline-item">
+            <div class="timeline-point"></div>
+            <div class="timeline-content timeline-left">
+                <div class="meal-icon">🍽️</div>
+                <h5 class="meal-title">Dinner (7:00 PM)</h5>
+                <p><strong>{{ day_plan.meals.dinner.name }}</strong></p>
+                <p>{{ day_plan.meals.dinner.description }}</p>
+                <p class="calories">{{ day_plan.meals.dinner.calories }} calories</p>
+                <div class="meal-nutrition-info">
+                    <span class="meal-nutrition-badge badge-protein">Protein: 30g</span>
+                    <span class="meal-nutrition-badge badge-carbs">Carbs: 35g</span>
+                    <span class="meal-nutrition-badge badge-fat">Fat: 15g</span>
+                    <span class="meal-nutrition-badge badge-fiber">Fiber: 6g</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+    <!-- Day Summary -->
+    <div class="day-summary">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Nutrient Balance</h5>
+                <p>Your daily macronutrient balance is optimized for your goals with 30% protein, 45% carbs, and 25% fat.</p>
+            </div>
+            <div class="col-md-6">
+                <h5>Nutritional Notes</h5>
+                <p class="nutritional-notes">{{ day_plan.nutritional_notes }}</p>
+                
+                <h5 class="mt-3">Key Nutrients</h5>
+                <div class="nutrient-item">
+                    <div class="nutrient-icon" style="background-color: #e53935;">Ca</div>
+                    <div>Calcium: 800mg (80% DV)</div>
+                </div>
+                <div class="nutrient-item">
+                    <div class="nutrient-icon" style="background-color: #43a047;">Fe</div>
+                    <div>Iron: 12mg (67% DV)</div>
+                </div>
+                <div class="nutrient-item">
+                    <div class="nutrient-icon" style="background-color: #fb8c00;">K</div>
+                    <div>Potassium: 3500mg (74% DV)</div>
+                </div>
+                <div class="nutrient-item">
+                    <div class="nutrient-icon" style="background-color: #3949ab;">Mg</div>
+                    <div>Magnesium: 320mg (76% DV)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+                            
+                            
+
+            <!-- Weekly Meal Calendar View for PDF -->
+            <div class="card mt-4 print-friendly">
+                <div class="card-header py-3">
+                    Weekly Meal Calendar
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Breakfast</th>
+                                <th>Lunch</th>
+                                <th>Dinner</th>
+                                <th>Calories</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for day_plan in plan.daily_plans %}
+                            <tr>
+                                <td><strong>{{ day_plan.day }}</strong><br>{{ dates[loop.index0] }}</td>
+                                <td>{{ day_plan.meals.breakfast.name }}</td>
+                                <td>{{ day_plan.meals.lunch.name }}</td>
+                                <td>{{ day_plan.meals.dinner.name }}</td>
+                                <td>{{ day_plan.total_calories }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- General Advice -->
+            <div class="card mt-4">
+                <div class="card-header py-3">
+                    General Advice
+                </div>
+                <div class="card-body">
+                    <p>{{ plan.general_advice }}</p>
+                    
+                    <div class="alert alert-info mt-3">
+                        <h5 class="alert-heading">Disclaimer</h5>
+                        <p>This diet plan is generated by an AI assistant and should be used as general guidance only. Please consult with a registered dietitian or healthcare professional before making significant changes to your diet, especially if you have any health conditions or concerns.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4 mb-5 no-print">
+                <a href="/" class="btn btn-outline-primary">Create Another Plan</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Load Chart.js if not already loaded
+    if (typeof Chart === 'undefined') {
+        console.error('Chart.js is not loaded. Please include Chart.js before this script.');
+        return;
+    }
+
+    // Create BMI gauge chart using a doughnut chart as base
+    const bmiCtx = document.getElementById('bmiChart').getContext('2d');
+    const userBmi = 25.5; // Replace with actual BMI value from your backend
+    
+    // Custom plugin to draw needle for gauge
+    const needlePlugin = {
+        id: 'gaugeNeedle',
+        afterDatasetDraw: (chart) => {
+            const {ctx, chartArea: {top, bottom, left, right, width, height}} = chart;
+            const dataset = chart.data.datasets[0];
+            const value = dataset.value;
+            const min = dataset.minValue || 0;
+            const max = dataset.maxValue || 100;
+            
+            const centerX = width / 2 + left;
+            const centerY = height / 2 + top;
+            const radius = Math.min(width, height) * 0.8 / 2;
+            
+            // Value to angle conversion (0 at bottom, clockwise)
+            const valueAngle = Math.PI + (value - min) / (max - min) * Math.PI;
+            
+            // Draw the needle
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.rotate(valueAngle);
+            
+            ctx.beginPath();
+            ctx.moveTo(0, -5);
+            ctx.lineTo(radius * 0.8, 0);
+            ctx.lineTo(0, 5);
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+            ctx.fill();
+            
+            // Draw the center circle
+            ctx.beginPath();
+            ctx.arc(0, 0, 10, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+            ctx.fill();
+            
+            ctx.restore();
+            
+            // Draw the value text
+            ctx.font = '16px Arial';
+            ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+            ctx.textAlign = 'center';
+            ctx.fillText(value.toFixed(1), centerX, centerY + 30);
+        }
+    };
+
+    const bmiChart = new Chart(bmiCtx, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                value: userBmi, // Your actual BMI value
+                minValue: 15,
+                maxValue: 40,
+                data: [3.5, 6.5, 5, 5, 5], // Segment sizes
+                backgroundColor: ['#4CAF50', '#8BC34A', '#FFC107', '#FF9800', '#F44336'],
+                circumference: 180,
+                rotation: 270
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            aspectRatio: 2,
+            layout: {
+                padding: 20
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: false
+                }
+            },
+            cutout: '70%'
+        },
+        plugins: [needlePlugin]
+    });
+
+    // Macros Chart
+    const macrosCtx = document.getElementById('macrosChart').getContext('2d');
+    const macrosChart = new Chart(macrosCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Protein', 'Carbohydrates', 'Fat'],
+            datasets: [{
+                data: [30, 45, 25],
+                backgroundColor: ['#ff6b6b', '#48dbfb', '#feca57'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.label + ': ' + context.raw + '%';
+                        }
+                    }
+                }
+            },
+            cutout: '70%'
+        }
+    });
+
+    // Weekly Calorie Pattern Chart
+    const calorieCtx = document.getElementById('calorieChart').getContext('2d');
+    const calorieChart = new Chart(calorieCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            datasets: [{
+                label: 'Daily Calories',
+                data: [1800, 1850, 1900, 2000, 2100, 2200, 1900],
+                backgroundColor: 'rgba(110, 142, 251, 0.6)',
+                borderColor: 'rgba(110, 142, 251, 1)',
+                borderWidth: 1
+            }, {
+                label: 'Target Calories',
+                data: [2000, 2000, 2000, 2000, 2000, 2000, 2000],
+                type: 'line',
+                borderColor: 'rgba(167, 119, 227, 1)',
+                borderDash: [5, 5],
+                borderWidth: 2,
+                pointRadius: 0,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    min: 1500,
+                    max: 2500,
+                    title: {
+                        display: true,
+                        text: 'Calories'
+                    }
+                }
+            }
+        }
+    });
+
+    // Handle the templated chart creation
+  // Create charts for all 7 days
+for (let i = 1; i <= 7; i++) {
+    createDailyCharts(i, {
+        breakfast: { calories: 400 },
+        morning_snack: { calories: 150 },
+        lunch: { calories: 600 },
+        afternoon_snack: { calories: 200 },
+        dinner: { calories: 550 }
+    });
+}
+
+    // Function to create daily nutrient charts
+    function createDailyCharts(dayIndex, meals) {
+        const nutrientCtxElement = document.getElementById('nutrientChart' + dayIndex);
+        if (!nutrientCtxElement) return;
+        
+        const nutrientCtx = nutrientCtxElement.getContext('2d');
+        const nutrientChart = new Chart(nutrientCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Breakfast', 'Morning Snack', 'Lunch', 'Afternoon Snack', 'Dinner'],
+                datasets: [{
+                    label: 'Calories',
+                    data: [
+                        meals.breakfast.calories, 
+                        meals.morning_snack ? meals.morning_snack.calories : 0, 
+                        meals.lunch.calories, 
+                        meals.afternoon_snack ? meals.afternoon_snack.calories : 0, 
+                        meals.dinner.calories
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Calorie Distribution by Meal'
+                    },
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Calories'
+                        }
+                    }
+                }
+            }
+        });
+
+        
+    }
+
+    // Initialize clickable calendar days
+    document.querySelectorAll('.calendar-day').forEach(day => {
+        day.addEventListener('click', function() {
+            if (this.classList.contains('active') || parseInt(this.textContent) <= new Date().getDate()) {
+                this.classList.toggle('completed');
+            }
+        });
+    });
+});
+    </script>
+</body>
+</html>

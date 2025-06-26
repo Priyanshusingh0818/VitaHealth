@@ -1,0 +1,538 @@
+2025-04-08 04:37:26,169 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-08 04:37:26,183 - __main__ - INFO - Model loaded successfully
+2025-04-08 04:37:26,237 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.3.193.64:5000
+2025-04-08 04:37:26,238 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-08 04:37:29,016 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:37:29] "GET / HTTP/1.1" 200 -
+2025-04-08 04:37:45,746 - __main__ - INFO - File saved: uploads\person1_bacteria_2.jpeg
+2025-04-08 04:37:46,142 - __main__ - ERROR - Error during prediction: Exception encountered when calling Sequential.call().
+
+[1mInput 0 of layer "dense" is incompatible with the layer: expected axis -1 of input shape to have value 65536, but received input with shape (1, 50176)[0m
+
+Arguments received by Sequential.call():
+  • inputs=tf.Tensor(shape=(1, 224, 224, 3), dtype=float32)
+  • training=False
+  • mask=None
+2025-04-08 04:37:46,167 - __main__ - ERROR - Traceback (most recent call last):
+  File "c:\Users\priya\OneDrive\Desktop\medtech\Pneunomia\app.py", line 91, in predict
+    prediction = model.predict(processed_image)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\priya\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\keras\src\utils\traceback_utils.py", line 122, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "C:\Users\priya\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\keras\src\layers\input_spec.py", line 227, in assert_input_compatibility
+    raise ValueError(
+ValueError: Exception encountered when calling Sequential.call().
+
+[1mInput 0 of layer "dense" is incompatible with the layer: expected axis -1 of input shape to have value 65536, but received input with shape (1, 50176)[0m
+
+Arguments received by Sequential.call():
+  • inputs=tf.Tensor(shape=(1, 224, 224, 3), dtype=float32)
+  • training=False
+  • mask=None
+
+2025-04-08 04:37:46,168 - __main__ - INFO - File removed: uploads\person1_bacteria_2.jpeg
+2025-04-08 04:37:46,169 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:37:46] "[35m[1mPOST /predict HTTP/1.1[0m" 500 -
+2025-04-08 04:37:49,482 - __main__ - INFO - File saved: uploads\person1_bacteria_2.jpeg
+2025-04-08 04:37:49,771 - __main__ - ERROR - Error during prediction: Exception encountered when calling Sequential.call().
+
+[1mInput 0 of layer "dense" is incompatible with the layer: expected axis -1 of input shape to have value 65536, but received input with shape (1, 50176)[0m
+
+Arguments received by Sequential.call():
+  • inputs=tf.Tensor(shape=(1, 224, 224, 3), dtype=float32)
+  • training=False
+  • mask=None
+2025-04-08 04:37:49,774 - __main__ - ERROR - Traceback (most recent call last):
+  File "c:\Users\priya\OneDrive\Desktop\medtech\Pneunomia\app.py", line 91, in predict
+    prediction = model.predict(processed_image)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\priya\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\keras\src\utils\traceback_utils.py", line 122, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "C:\Users\priya\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\keras\src\layers\input_spec.py", line 227, in assert_input_compatibility
+    raise ValueError(
+ValueError: Exception encountered when calling Sequential.call().
+
+[1mInput 0 of layer "dense" is incompatible with the layer: expected axis -1 of input shape to have value 65536, but received input with shape (1, 50176)[0m
+
+Arguments received by Sequential.call():
+  • inputs=tf.Tensor(shape=(1, 224, 224, 3), dtype=float32)
+  • training=False
+  • mask=None
+
+2025-04-08 04:37:49,775 - __main__ - INFO - File removed: uploads\person1_bacteria_2.jpeg
+2025-04-08 04:37:49,776 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:37:49] "[35m[1mPOST /predict HTTP/1.1[0m" 500 -
+2025-04-08 04:37:52,157 - __main__ - INFO - File saved: uploads\person1_bacteria_2.jpeg
+2025-04-08 04:37:52,449 - __main__ - ERROR - Error during prediction: Exception encountered when calling Sequential.call().
+
+[1mInput 0 of layer "dense" is incompatible with the layer: expected axis -1 of input shape to have value 65536, but received input with shape (1, 50176)[0m
+
+Arguments received by Sequential.call():
+  • inputs=tf.Tensor(shape=(1, 224, 224, 3), dtype=float32)
+  • training=False
+  • mask=None
+2025-04-08 04:37:52,451 - __main__ - ERROR - Traceback (most recent call last):
+  File "c:\Users\priya\OneDrive\Desktop\medtech\Pneunomia\app.py", line 91, in predict
+    prediction = model.predict(processed_image)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\priya\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\keras\src\utils\traceback_utils.py", line 122, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "C:\Users\priya\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\keras\src\layers\input_spec.py", line 227, in assert_input_compatibility
+    raise ValueError(
+ValueError: Exception encountered when calling Sequential.call().
+
+[1mInput 0 of layer "dense" is incompatible with the layer: expected axis -1 of input shape to have value 65536, but received input with shape (1, 50176)[0m
+
+Arguments received by Sequential.call():
+  • inputs=tf.Tensor(shape=(1, 224, 224, 3), dtype=float32)
+  • training=False
+  • mask=None
+
+2025-04-08 04:37:52,452 - __main__ - INFO - File removed: uploads\person1_bacteria_2.jpeg
+2025-04-08 04:37:52,453 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:37:52] "[35m[1mPOST /predict HTTP/1.1[0m" 500 -
+2025-04-08 04:39:55,455 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-08 04:39:55,465 - __main__ - INFO - Model loaded successfully
+2025-04-08 04:39:55,491 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.3.193.64:5000
+2025-04-08 04:39:55,491 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-08 04:39:57,607 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:39:57] "GET / HTTP/1.1" 200 -
+2025-04-08 04:40:02,016 - __main__ - INFO - File saved: uploads\person2_bacteria_3.jpeg
+2025-04-08 04:40:02,136 - __main__ - ERROR - Error during prediction: Exception encountered when calling Sequential.call().
+
+[1mInput 0 of layer "conv2d" is incompatible with the layer: expected axis -1 of input shape to have value 3, but received input with shape (1, 256, 256, 1)[0m
+
+Arguments received by Sequential.call():
+  • inputs=tf.Tensor(shape=(1, 256, 256, 1), dtype=float32)
+  • training=False
+  • mask=None
+2025-04-08 04:40:02,138 - __main__ - ERROR - Traceback (most recent call last):
+  File "c:\Users\priya\OneDrive\Desktop\medtech\Pneunomia\app.py", line 92, in predict
+    prediction = model.predict(processed_image)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\priya\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\keras\src\utils\traceback_utils.py", line 122, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "C:\Users\priya\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\keras\src\layers\input_spec.py", line 227, in assert_input_compatibility
+    raise ValueError(
+ValueError: Exception encountered when calling Sequential.call().
+
+[1mInput 0 of layer "conv2d" is incompatible with the layer: expected axis -1 of input shape to have value 3, but received input with shape (1, 256, 256, 1)[0m
+
+Arguments received by Sequential.call():
+  • inputs=tf.Tensor(shape=(1, 256, 256, 1), dtype=float32)
+  • training=False
+  • mask=None
+
+2025-04-08 04:40:02,139 - __main__ - INFO - File removed: uploads\person2_bacteria_3.jpeg
+2025-04-08 04:40:02,140 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:40:02] "[35m[1mPOST /predict HTTP/1.1[0m" 500 -
+2025-04-08 04:40:04,247 - __main__ - INFO - File saved: uploads\person2_bacteria_3.jpeg
+2025-04-08 04:40:04,372 - __main__ - ERROR - Error during prediction: Exception encountered when calling Sequential.call().
+
+[1mInput 0 of layer "conv2d" is incompatible with the layer: expected axis -1 of input shape to have value 3, but received input with shape (1, 256, 256, 1)[0m
+
+Arguments received by Sequential.call():
+  • inputs=tf.Tensor(shape=(1, 256, 256, 1), dtype=float32)
+  • training=False
+  • mask=None
+2025-04-08 04:40:04,374 - __main__ - ERROR - Traceback (most recent call last):
+  File "c:\Users\priya\OneDrive\Desktop\medtech\Pneunomia\app.py", line 92, in predict
+    prediction = model.predict(processed_image)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\priya\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\keras\src\utils\traceback_utils.py", line 122, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "C:\Users\priya\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\keras\src\layers\input_spec.py", line 227, in assert_input_compatibility
+    raise ValueError(
+ValueError: Exception encountered when calling Sequential.call().
+
+[1mInput 0 of layer "conv2d" is incompatible with the layer: expected axis -1 of input shape to have value 3, but received input with shape (1, 256, 256, 1)[0m
+
+Arguments received by Sequential.call():
+  • inputs=tf.Tensor(shape=(1, 256, 256, 1), dtype=float32)
+  • training=False
+  • mask=None
+
+2025-04-08 04:40:04,375 - __main__ - INFO - File removed: uploads\person2_bacteria_3.jpeg
+2025-04-08 04:40:04,375 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:40:04] "[35m[1mPOST /predict HTTP/1.1[0m" 500 -
+2025-04-08 04:43:16,666 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-08 04:43:16,676 - __main__ - INFO - Model loaded successfully
+2025-04-08 04:43:16,701 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.3.193.64:5000
+2025-04-08 04:43:16,701 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-08 04:43:19,740 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:43:19] "[33mGET / HTTP/1.1[0m" 404 -
+2025-04-08 04:47:21,320 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-08 04:47:21,332 - __main__ - INFO - Model loaded successfully
+2025-04-08 04:47:21,361 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.3.193.64:5000
+2025-04-08 04:47:21,361 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-08 04:47:23,019 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:47:23] "GET / HTTP/1.1" 200 -
+2025-04-08 04:47:23,093 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:47:23] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-08 04:47:45,616 - __main__ - INFO - File saved: uploads\person1000_bacteria_2931.jpeg
+2025-04-08 04:47:46,328 - __main__ - INFO - Prediction complete: PNEUMONIA with confidence 0.96
+2025-04-08 04:47:46,330 - __main__ - INFO - File removed: uploads\person1000_bacteria_2931.jpeg
+2025-04-08 04:47:46,330 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:47:46] "POST /predict HTTP/1.1" 200 -
+2025-04-08 04:47:54,317 - __main__ - INFO - File saved: uploads\person1000_bacteria_2931.jpeg
+2025-04-08 04:47:54,504 - __main__ - INFO - Prediction complete: PNEUMONIA with confidence 0.96
+2025-04-08 04:47:54,505 - __main__ - INFO - File removed: uploads\person1000_bacteria_2931.jpeg
+2025-04-08 04:47:54,506 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:47:54] "POST /predict HTTP/1.1" 200 -
+2025-04-08 04:48:08,604 - __main__ - INFO - File saved: uploads\IM-0151-0001.jpeg
+2025-04-08 04:48:08,779 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.97
+2025-04-08 04:48:08,780 - __main__ - INFO - File removed: uploads\IM-0151-0001.jpeg
+2025-04-08 04:48:08,780 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:48:08] "POST /predict HTTP/1.1" 200 -
+2025-04-08 04:53:07,655 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:53:07] "GET / HTTP/1.1" 200 -
+2025-04-08 04:53:12,515 - __main__ - INFO - File saved: uploads\images.jpeg
+2025-04-08 04:53:12,696 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.77
+2025-04-08 04:53:12,697 - __main__ - INFO - File removed: uploads\images.jpeg
+2025-04-08 04:53:12,698 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:53:12] "POST /predict HTTP/1.1" 200 -
+2025-04-08 04:54:17,868 - __main__ - INFO - File saved: uploads\41479_2016_5010038_Fig1.jpg
+2025-04-08 04:54:18,051 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.88
+2025-04-08 04:54:18,052 - __main__ - INFO - File removed: uploads\41479_2016_5010038_Fig1.jpg
+2025-04-08 04:54:18,052 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:54:18] "POST /predict HTTP/1.1" 200 -
+2025-04-08 04:55:14,828 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:55:14] "GET / HTTP/1.1" 200 -
+2025-04-08 04:55:18,864 - __main__ - INFO - File saved: uploads\41479_2016_5010038_Fig1.jpg
+2025-04-08 04:55:19,027 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.88
+2025-04-08 04:55:19,027 - __main__ - INFO - File removed: uploads\41479_2016_5010038_Fig1.jpg
+2025-04-08 04:55:19,028 - werkzeug - INFO - 127.0.0.1 - - [08/Apr/2025 04:55:19] "POST /predict HTTP/1.1" 200 -
+2025-04-15 05:25:32,231 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-15 05:25:32,257 - __main__ - INFO - Model loaded successfully
+2025-04-15 05:25:32,294 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.3.193.64:5000
+2025-04-15 05:25:32,294 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-15 05:25:35,231 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 05:25:35] "GET / HTTP/1.1" 200 -
+2025-04-15 05:25:42,472 - __main__ - INFO - File saved: uploads\images_1.jpeg
+2025-04-15 05:25:43,283 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.95
+2025-04-15 05:25:43,287 - __main__ - INFO - File removed: uploads\images_1.jpeg
+2025-04-15 05:25:43,287 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 05:25:43] "POST /predict HTTP/1.1" 200 -
+2025-04-15 05:25:56,231 - __main__ - INFO - File saved: uploads\41479_2016_5010038_Fig1.jpg
+2025-04-15 05:25:56,431 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.88
+2025-04-15 05:25:56,431 - __main__ - INFO - File removed: uploads\41479_2016_5010038_Fig1.jpg
+2025-04-15 05:25:56,433 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 05:25:56] "POST /predict HTTP/1.1" 200 -
+2025-04-15 05:26:15,723 - __main__ - INFO - File saved: uploads\person1_virus_13.jpeg
+2025-04-15 05:26:15,930 - __main__ - INFO - Prediction complete: PNEUMONIA with confidence 0.84
+2025-04-15 05:26:15,931 - __main__ - INFO - File removed: uploads\person1_virus_13.jpeg
+2025-04-15 05:26:15,931 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 05:26:15] "POST /predict HTTP/1.1" 200 -
+2025-04-15 05:26:59,803 - __main__ - INFO - File saved: uploads\eda038d593680760a83e847a2c3c6f_big_gallery.jpeg
+2025-04-15 05:27:00,013 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.62
+2025-04-15 05:27:00,014 - __main__ - INFO - File removed: uploads\eda038d593680760a83e847a2c3c6f_big_gallery.jpeg
+2025-04-15 05:27:00,014 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 05:27:00] "POST /predict HTTP/1.1" 200 -
+2025-04-15 05:28:09,140 - __main__ - INFO - File saved: uploads\images_2.jpeg
+2025-04-15 05:28:09,351 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.99
+2025-04-15 05:28:09,351 - __main__ - INFO - File removed: uploads\images_2.jpeg
+2025-04-15 05:28:09,351 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 05:28:09] "POST /predict HTTP/1.1" 200 -
+2025-04-15 05:28:39,386 - __main__ - INFO - File saved: uploads\CR.Eosiniphil_720.jpg
+2025-04-15 05:28:39,592 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.65
+2025-04-15 05:28:39,598 - __main__ - INFO - File removed: uploads\CR.Eosiniphil_720.jpg
+2025-04-15 05:28:39,598 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 05:28:39] "POST /predict HTTP/1.1" 200 -
+2025-04-15 05:29:14,797 - __main__ - INFO - File saved: uploads\person1940_bacteria_4861.jpeg
+2025-04-15 05:29:15,012 - __main__ - INFO - Prediction complete: PNEUMONIA with confidence 0.98
+2025-04-15 05:29:15,019 - __main__ - INFO - File removed: uploads\person1940_bacteria_4861.jpeg
+2025-04-15 05:29:15,020 - werkzeug - INFO - 127.0.0.1 - - [15/Apr/2025 05:29:15] "POST /predict HTTP/1.1" 200 -
+2025-04-21 14:05:54,828 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-21 14:05:54,842 - __main__ - INFO - Model loaded successfully
+2025-04-21 14:05:54,873 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.3.173.60:5001
+2025-04-21 14:05:54,873 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-21 14:18:13,878 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-21 14:18:13,890 - __main__ - INFO - Model loaded successfully
+2025-04-21 14:18:13,910 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.3.173.60:5001
+2025-04-21 14:18:13,910 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-21 14:18:23,092 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:18:23] "GET / HTTP/1.1" 200 -
+2025-04-21 14:18:23,499 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:18:23] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-21 14:19:13,746 - __main__ - INFO - File saved: uploads\Normal_case_2.jpg
+2025-04-21 14:19:14,823 - __main__ - INFO - Prediction complete: NORMAL with confidence 1.00
+2025-04-21 14:19:14,825 - __main__ - INFO - File removed: uploads\Normal_case_2.jpg
+2025-04-21 14:19:14,825 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:19:14] "POST /predict HTTP/1.1" 200 -
+2025-04-21 14:19:22,008 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:19:22] "GET / HTTP/1.1" 200 -
+2025-04-21 14:22:17,576 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:22:17] "GET / HTTP/1.1" 200 -
+2025-04-21 14:30:05,074 - __main__ - INFO - File saved: uploads\IM-0028-0001.jpeg
+2025-04-21 14:30:05,337 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.92
+2025-04-21 14:30:05,339 - __main__ - INFO - File removed: uploads\IM-0028-0001.jpeg
+2025-04-21 14:30:05,340 - werkzeug - INFO - 127.0.0.1 - - [21/Apr/2025 14:30:05] "POST /predict HTTP/1.1" 200 -
+2025-04-22 22:03:09,963 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-22 22:03:09,987 - __main__ - INFO - Model loaded successfully
+2025-04-22 22:03:10,025 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.3.173.60:5001
+2025-04-22 22:03:10,025 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-22 23:13:52,593 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-22 23:13:52,627 - __main__ - INFO - Model loaded successfully
+2025-04-22 23:13:52,661 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.50.251:5001
+2025-04-22 23:13:52,661 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-22 23:17:19,880 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 23:17:19] "GET / HTTP/1.1" 200 -
+2025-04-22 23:17:20,028 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 23:17:20] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-22 23:17:41,010 - __main__ - INFO - File saved: uploads\IM-0001-0001.jpeg
+2025-04-22 23:17:41,116 - __main__ - ERROR - Error preprocessing image: cannot identify image file <_io.BytesIO object at 0x000001C367383FB0>
+2025-04-22 23:17:41,152 - __main__ - ERROR - Traceback (most recent call last):
+  File "C:\Users\priya\OneDrive\Desktop\medfinal\pne.py", line 43, in preprocess_image
+    img = image.load_img(img_path, target_size=(256, 256), color_mode='rgb')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\priya\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\keras\src\utils\image_utils.py", line 236, in load_img
+    img = pil_image.open(io.BytesIO(f.read()))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\priya\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PIL\Image.py", line 3498, in open
+    raise UnidentifiedImageError(msg)
+PIL.UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x000001C367383FB0>
+
+2025-04-22 23:17:41,152 - __main__ - ERROR - Error during prediction: cannot identify image file <_io.BytesIO object at 0x000001C367383FB0>
+2025-04-22 23:17:41,155 - __main__ - ERROR - Traceback (most recent call last):
+  File "C:\Users\priya\OneDrive\Desktop\medfinal\pne.py", line 89, in predict
+    processed_image = preprocess_image(file_path)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\priya\OneDrive\Desktop\medfinal\pne.py", line 43, in preprocess_image
+    img = image.load_img(img_path, target_size=(256, 256), color_mode='rgb')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\priya\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\keras\src\utils\image_utils.py", line 236, in load_img
+    img = pil_image.open(io.BytesIO(f.read()))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\priya\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PIL\Image.py", line 3498, in open
+    raise UnidentifiedImageError(msg)
+PIL.UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x000001C367383FB0>
+
+2025-04-22 23:17:41,158 - __main__ - INFO - File removed: uploads\IM-0001-0001.jpeg
+2025-04-22 23:17:41,160 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 23:17:41] "[35m[1mPOST /predict HTTP/1.1[0m" 500 -
+2025-04-22 23:17:53,364 - __main__ - INFO - File saved: uploads\person1000_bacteria_2931.jpeg
+2025-04-22 23:17:54,055 - __main__ - INFO - Prediction complete: PNEUMONIA with confidence 0.96
+2025-04-22 23:17:54,063 - __main__ - INFO - File removed: uploads\person1000_bacteria_2931.jpeg
+2025-04-22 23:17:54,063 - werkzeug - INFO - 127.0.0.1 - - [22/Apr/2025 23:17:54] "POST /predict HTTP/1.1" 200 -
+2025-04-23 01:30:04,444 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-23 01:30:04,469 - __main__ - INFO - Model loaded successfully
+2025-04-23 01:30:04,508 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.110.251:5001
+2025-04-23 01:30:04,508 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-23 01:30:07,613 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:30:07] "GET / HTTP/1.1" 200 -
+2025-04-23 01:30:07,751 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:30:07] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-23 01:30:24,011 - __main__ - INFO - File saved: uploads\IM-0011-0001-0001.jpeg
+2025-04-23 01:30:25,050 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.95
+2025-04-23 01:30:25,056 - __main__ - INFO - File removed: uploads\IM-0011-0001-0001.jpeg
+2025-04-23 01:30:25,056 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:30:25] "POST /predict HTTP/1.1" 200 -
+2025-04-23 01:33:06,607 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:33:06] "GET / HTTP/1.1" 200 -
+2025-04-23 01:33:06,767 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:33:06] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-23 01:33:39,235 - __main__ - INFO - File saved: uploads\5O5A2937.JPG
+2025-04-23 01:33:39,676 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.58
+2025-04-23 01:33:39,676 - __main__ - INFO - File removed: uploads\5O5A2937.JPG
+2025-04-23 01:33:39,682 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:33:39] "POST /predict HTTP/1.1" 200 -
+2025-04-23 01:34:32,142 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:34:32] "GET / HTTP/1.1" 200 -
+2025-04-23 01:34:53,026 - __main__ - INFO - File saved: uploads\person1_bacteria_2.jpeg
+2025-04-23 01:34:53,221 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.53
+2025-04-23 01:34:53,221 - __main__ - INFO - File removed: uploads\person1_bacteria_2.jpeg
+2025-04-23 01:34:53,221 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:34:53] "POST /predict HTTP/1.1" 200 -
+2025-04-23 01:35:55,090 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-23 01:35:55,110 - __main__ - INFO - Model loaded successfully
+2025-04-23 01:35:55,156 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.110.251:5001
+2025-04-23 01:35:55,156 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-23 01:35:58,494 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:35:58] "GET / HTTP/1.1" 200 -
+2025-04-23 01:36:20,587 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:36:20] "GET / HTTP/1.1" 200 -
+2025-04-23 01:36:52,098 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-23 01:36:52,116 - __main__ - INFO - Model loaded successfully
+2025-04-23 01:36:52,147 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.110.251:5001
+2025-04-23 01:36:52,147 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-23 01:36:54,577 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:36:54] "GET / HTTP/1.1" 200 -
+2025-04-23 01:37:00,236 - __main__ - INFO - File saved: uploads\person3_bacteria_10.jpeg
+2025-04-23 01:37:00,888 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.82
+2025-04-23 01:37:00,888 - __main__ - INFO - File removed: uploads\person3_bacteria_10.jpeg
+2025-04-23 01:37:00,891 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:37:00] "POST /predict HTTP/1.1" 200 -
+2025-04-23 01:37:57,067 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:37:57] "GET / HTTP/1.1" 200 -
+2025-04-23 01:38:02,927 - __main__ - INFO - File saved: uploads\person3_bacteria_10.jpeg
+2025-04-23 01:38:03,164 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.82
+2025-04-23 01:38:03,164 - __main__ - INFO - File removed: uploads\person3_bacteria_10.jpeg
+2025-04-23 01:38:03,164 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:38:03] "POST /predict HTTP/1.1" 200 -
+2025-04-23 01:46:05,133 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:46:05] "GET / HTTP/1.1" 200 -
+2025-04-23 01:46:24,518 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-23 01:46:24,537 - __main__ - INFO - Model loaded successfully
+2025-04-23 01:46:24,579 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.110.251:5001
+2025-04-23 01:46:24,579 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-23 01:46:26,977 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:46:26] "GET / HTTP/1.1" 200 -
+2025-04-23 01:49:49,472 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-23 01:49:49,487 - __main__ - INFO - Model loaded successfully
+2025-04-23 01:49:49,520 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.110.251:5001
+2025-04-23 01:49:49,520 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-23 01:49:52,520 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:49:52] "GET / HTTP/1.1" 200 -
+2025-04-23 01:50:36,678 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:50:36] "GET / HTTP/1.1" 200 -
+2025-04-23 01:51:11,580 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-23 01:51:11,589 - __main__ - INFO - Model loaded successfully
+2025-04-23 01:51:11,629 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.110.251:5001
+2025-04-23 01:51:11,629 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-23 01:51:15,061 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:51:15] "GET / HTTP/1.1" 200 -
+2025-04-23 01:52:26,342 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-23 01:52:26,359 - __main__ - INFO - Model loaded successfully
+2025-04-23 01:52:26,402 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.110.251:5001
+2025-04-23 01:52:26,404 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-23 01:52:30,068 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:52:30] "GET / HTTP/1.1" 200 -
+2025-04-23 01:52:34,096 - __main__ - INFO - File saved: uploads\person3_bacteria_13.jpeg
+2025-04-23 01:52:34,665 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.91
+2025-04-23 01:52:34,665 - __main__ - INFO - File removed: uploads\person3_bacteria_13.jpeg
+2025-04-23 01:52:34,665 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 01:52:34] "POST /predict HTTP/1.1" 200 -
+2025-04-23 02:00:27,098 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-23 02:00:27,115 - __main__ - INFO - Model loaded successfully
+2025-04-23 02:00:27,147 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.110.251:5001
+2025-04-23 02:00:27,147 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-23 02:00:29,607 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 02:00:29] "GET / HTTP/1.1" 200 -
+2025-04-23 02:00:50,184 - __main__ - INFO - File saved: uploads\person1_bacteria_2.jpeg
+2025-04-23 02:00:50,834 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.53
+2025-04-23 02:00:50,834 - __main__ - INFO - File removed: uploads\person1_bacteria_2.jpeg
+2025-04-23 02:00:50,840 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 02:00:50] "POST /predict HTTP/1.1" 200 -
+2025-04-23 02:01:20,276 - __main__ - INFO - File saved: uploads\person12_bacteria_48.jpeg
+2025-04-23 02:01:20,489 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.83
+2025-04-23 02:01:20,491 - __main__ - INFO - File removed: uploads\person12_bacteria_48.jpeg
+2025-04-23 02:01:20,491 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 02:01:20] "POST /predict HTTP/1.1" 200 -
+2025-04-23 02:01:35,502 - __main__ - INFO - File saved: uploads\IM-0117-0001.jpeg
+2025-04-23 02:01:35,749 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.92
+2025-04-23 02:01:35,749 - __main__ - INFO - File removed: uploads\IM-0117-0001.jpeg
+2025-04-23 02:01:35,749 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 02:01:35] "POST /predict HTTP/1.1" 200 -
+2025-04-23 02:01:47,117 - __main__ - INFO - File saved: uploads\person23_bacteria_83.jpeg
+2025-04-23 02:01:47,338 - __main__ - INFO - Prediction complete: PNEUMONIA with confidence 0.56
+2025-04-23 02:01:47,341 - __main__ - INFO - File removed: uploads\person23_bacteria_83.jpeg
+2025-04-23 02:01:47,341 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 02:01:47] "POST /predict HTTP/1.1" 200 -
+2025-04-23 02:01:56,971 - __main__ - INFO - File saved: uploads\person23_bacteria_84.jpeg
+2025-04-23 02:01:57,174 - __main__ - INFO - Prediction complete: PNEUMONIA with confidence 0.98
+2025-04-23 02:01:57,174 - __main__ - INFO - File removed: uploads\person23_bacteria_84.jpeg
+2025-04-23 02:01:57,183 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 02:01:57] "POST /predict HTTP/1.1" 200 -
+2025-04-23 02:02:05,917 - __main__ - INFO - File saved: uploads\person22_bacteria_76.jpeg
+2025-04-23 02:02:06,129 - __main__ - INFO - Prediction complete: PNEUMONIA with confidence 0.98
+2025-04-23 02:02:06,129 - __main__ - INFO - File removed: uploads\person22_bacteria_76.jpeg
+2025-04-23 02:02:06,129 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 02:02:06] "POST /predict HTTP/1.1" 200 -
+2025-04-23 02:04:41,571 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-23 02:04:41,585 - __main__ - INFO - Model loaded successfully
+2025-04-23 02:04:41,618 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.110.251:5001
+2025-04-23 02:04:41,618 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-23 02:05:16,543 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 02:05:16] "GET / HTTP/1.1" 200 -
+2025-04-23 02:54:26,081 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-23 02:54:26,097 - __main__ - INFO - Model loaded successfully
+2025-04-23 02:54:26,130 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.3.173.60:5001
+2025-04-23 02:54:26,130 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-23 03:08:24,924 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 03:08:24] "GET / HTTP/1.1" 200 -
+2025-04-23 03:08:25,000 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 03:08:25] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-23 03:08:34,602 - __main__ - INFO - File saved: uploads\no_2.jpeg
+2025-04-23 03:08:35,323 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.84
+2025-04-23 03:08:35,331 - __main__ - INFO - File removed: uploads\no_2.jpeg
+2025-04-23 03:08:35,331 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 03:08:35] "POST /predict HTTP/1.1" 200 -
+2025-04-23 03:08:42,469 - __main__ - INFO - File saved: uploads\yes_1.jpeg
+2025-04-23 03:08:42,693 - __main__ - INFO - Prediction complete: PNEUMONIA with confidence 1.00
+2025-04-23 03:08:42,693 - __main__ - INFO - File removed: uploads\yes_1.jpeg
+2025-04-23 03:08:42,693 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 03:08:42] "POST /predict HTTP/1.1" 200 -
+2025-04-23 03:08:49,687 - __main__ - INFO - File saved: uploads\yes_3.jpeg
+2025-04-23 03:08:49,926 - __main__ - INFO - Prediction complete: PNEUMONIA with confidence 0.99
+2025-04-23 03:08:49,926 - __main__ - INFO - File removed: uploads\yes_3.jpeg
+2025-04-23 03:08:49,926 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 03:08:49] "POST /predict HTTP/1.1" 200 -
+2025-04-23 03:09:18,919 - __main__ - INFO - File saved: uploads\systum.jpeg
+2025-04-23 03:09:19,140 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.72
+2025-04-23 03:09:19,140 - __main__ - INFO - File removed: uploads\systum.jpeg
+2025-04-23 03:09:19,140 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 03:09:19] "POST /predict HTTP/1.1" 200 -
+2025-04-23 03:09:37,851 - __main__ - INFO - File saved: uploads\systum2.jpeg
+2025-04-23 03:09:38,073 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.97
+2025-04-23 03:09:38,073 - __main__ - INFO - File removed: uploads\systum2.jpeg
+2025-04-23 03:09:38,073 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 03:09:38] "POST /predict HTTP/1.1" 200 -
+2025-04-23 03:09:57,988 - __main__ - INFO - File saved: uploads\gr1.jpeg
+2025-04-23 03:09:58,244 - __main__ - INFO - Prediction complete: NORMAL with confidence 1.00
+2025-04-23 03:09:58,244 - __main__ - INFO - File removed: uploads\gr1.jpeg
+2025-04-23 03:09:58,244 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 03:09:58] "POST /predict HTTP/1.1" 200 -
+2025-04-23 03:10:39,346 - __main__ - INFO - File saved: uploads\gr5.jpeg
+2025-04-23 03:10:39,550 - __main__ - INFO - Prediction complete: NORMAL with confidence 1.00
+2025-04-23 03:10:39,558 - __main__ - INFO - File removed: uploads\gr5.jpeg
+2025-04-23 03:10:39,558 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 03:10:39] "POST /predict HTTP/1.1" 200 -
+2025-04-23 03:10:48,235 - __main__ - INFO - File saved: uploads\systum2.jpeg
+2025-04-23 03:10:48,415 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.97
+2025-04-23 03:10:48,415 - __main__ - INFO - File removed: uploads\systum2.jpeg
+2025-04-23 03:10:48,415 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 03:10:48] "POST /predict HTTP/1.1" 200 -
+2025-04-23 03:11:00,918 - __main__ - INFO - File saved: uploads\yes_1.jpeg
+2025-04-23 03:11:01,105 - __main__ - INFO - Prediction complete: PNEUMONIA with confidence 1.00
+2025-04-23 03:11:01,105 - __main__ - INFO - File removed: uploads\yes_1.jpeg
+2025-04-23 03:11:01,105 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 03:11:01] "POST /predict HTTP/1.1" 200 -
+2025-04-23 10:09:59,437 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-23 10:09:59,457 - __main__ - INFO - Model loaded successfully
+2025-04-23 10:09:59,486 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.9.85.91:5001
+2025-04-23 10:09:59,489 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-23 10:15:18,904 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 10:15:18] "GET / HTTP/1.1" 200 -
+2025-04-23 10:15:19,023 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 10:15:19] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-23 10:15:30,941 - __main__ - INFO - File saved: uploads\no_3.jpeg
+2025-04-23 10:15:31,687 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.88
+2025-04-23 10:15:31,687 - __main__ - INFO - File removed: uploads\no_3.jpeg
+2025-04-23 10:15:31,687 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 10:15:31] "POST /predict HTTP/1.1" 200 -
+2025-04-23 10:58:42,538 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 10:58:42] "GET / HTTP/1.1" 200 -
+2025-04-23 12:12:09,251 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-23 12:12:09,276 - __main__ - INFO - Model loaded successfully
+2025-04-23 12:12:09,307 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.9.85.91:5001
+2025-04-23 12:12:09,307 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-23 12:13:07,163 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:13:07] "GET / HTTP/1.1" 200 -
+2025-04-23 12:22:42,810 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-23 12:22:42,840 - __main__ - INFO - Model loaded successfully
+2025-04-23 12:22:42,873 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.9.85.91:5001
+2025-04-23 12:22:42,873 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-23 12:49:57,263 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:49:57] "GET / HTTP/1.1" 200 -
+2025-04-23 12:50:06,884 - __main__ - INFO - File saved: uploads\no_3.jpeg
+2025-04-23 12:50:07,683 - __main__ - INFO - Prediction complete: NORMAL with confidence 0.88
+2025-04-23 12:50:07,683 - __main__ - INFO - File removed: uploads\no_3.jpeg
+2025-04-23 12:50:07,691 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 12:50:07] "POST /predict HTTP/1.1" 200 -
+2025-04-24 10:05:53,744 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-24 10:05:53,775 - __main__ - INFO - Model loaded successfully
+2025-04-24 10:05:53,808 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://172.20.10.8:5001
+2025-04-24 10:05:53,810 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2019-01-24 14:11:27,556 - absl - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2019-01-24 14:11:27,578 - __main__ - INFO - Model loaded successfully
+2019-01-24 14:11:27,616 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.1.10:5001
+2019-01-24 14:11:27,617 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2019-01-24 14:25:54,110 - werkzeug - INFO - 127.0.0.1 - - [24/Jan/2019 14:25:54] "GET / HTTP/1.1" 200 -
+2019-01-24 14:25:54,267 - werkzeug - INFO - 127.0.0.1 - - [24/Jan/2019 14:25:54] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2019-01-24 14:26:14,237 - __main__ - INFO - File saved: uploads\person2_bacteria_3.jpeg
+2019-01-24 14:26:14,976 - __main__ - INFO - Prediction complete: PNEUMONIA with confidence 0.90
+2019-01-24 14:26:14,977 - __main__ - INFO - File removed: uploads\person2_bacteria_3.jpeg
+2019-01-24 14:26:14,979 - werkzeug - INFO - 127.0.0.1 - - [24/Jan/2019 14:26:14] "POST /predict HTTP/1.1" 200 -

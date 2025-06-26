@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Planner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #2f69ff, #d039ff);
+            --secondary-gradient: linear-gradient(135deg, #0a1929, #162742);
+            --accent-color: #4d8bff;
+            --text-primary: #e9ecef;
+            --text-secondary: #adb5bd;
+            --card-bg: rgba(13, 25, 48, 0.8);
+            --input-bg: rgba(20, 33, 61, 0.6);
+            --header-bg: linear-gradient(135deg, #0f2341, #1c4072);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #040d21;
+            color: var(--text-primary);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(47, 105, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 75% 75%, rgba(208, 57, 255, 0.1) 0%, transparent 40%);
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: var(--header-bg);
+            color: white;
+            padding: 2.5rem 0;
+            border-radius: 0 0 25px 25px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSJyZ2JhKDAsIDAsIDAsIDAuMDUpIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wMykiPjwvcmVjdD4KPC9zdmc+');
+            opacity: 0.4;
+        }
+
+        .header h1 {
+            position: relative;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .card {
+            border-radius: 20px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 12px 28px;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(47, 105, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #3d7eff, #d64dff);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(47, 105, 255, 0.4);
+        }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-control, .form-select {
+            border-radius: 12px;
+            padding: 12px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--input-bg);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            box-shadow: 0 0 0 3px rgba(77, 139, 255, 0.25);
+            border-color: var(--accent-color);
+            background: rgba(25, 40, 70, 0.7);
+        }
+
+        .form-control::placeholder {
+            color: rgba(173, 181, 189, 0.6);
+        }
+
+        /* Fix for disappearing text in input fields */
+.form-control:focus, .form-select:focus {
+    color: var(--text-primary);  /* Keep text visible when focused */
+    box-shadow: 0 0 0 3px rgba(77, 139, 255, 0.25);
+    border-color: var(--accent-color);
+    background: rgba(25, 40, 70, 0.7);
+}
+
+/* Ensure text color stays consistent */
+.form-control, .form-select {
+    color: var(--text-primary) !important;  /* The !important makes sure it overrides Bootstrap defaults */
+}
+        .card-header {
+            background: rgba(20, 33, 61, 0.6);
+            border-radius: 20px 20px 0 0 !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-weight: 700;
+            color: var(--text-primary);
+            padding: 1.2rem 1.5rem;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .features {
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(20, 33, 61, 0.4);
+            border-radius: 16px;
+            padding: 2rem;
+            height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card, .feature-card {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .feature-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .feature-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .feature-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1.5rem 0;
+                border-radius: 0 0 15px 15px;
+            }
+            .card {
+                border-radius: 15px;
+            }
+            .btn-primary {
+                padding: 10px 20px;
+            }
+        }
+
+        /* Dark theme form elements */
+        select option {
+            background-color: #14213d;
+            color: var(--text-primary);
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            opacity: 0.7;
+        }
+
+        /* Glassmorphism cards */
+        .glassmorphism {
+            background: rgba(20, 33, 61, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="display-4">Diet Planner</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <div class="card mb-4 glassmorphism">
+                <div class="card-header py-3">
+                    <i class="fas fa-user-circle me-2"></i> Personal Information
+                </div>
+                <div class="card-body">
+                    <form action="/recommend" method="post">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="age" class="form-label">Age</label>
+                                <input type="number" class="form-control" id="age" name="age" min="18" max="100" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="weight" class="form-label">Weight (kg)</label>
+                                <input type="number" class="form-control" id="weight" name="weight" step="0.1" min="30" max="300" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="height" class="form-label">Height (cm)</label>
+                                <input type="number" class="form-control" id="height" name="height" step="0.1" min="100" max="250" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="gender" class="form-label">Gender</label>
+                                <select class="form-select" id="gender" name="gender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Non-binary">Non-binary</option>
+                                    <option value="Prefer not to say">Prefer not to say</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="activity_level" class="form-label">Activity Level</label>
+                            <select class="form-select" id="activity_level" name="activity_level" required>
+                                <option value="">Select Activity Level</option>
+                                <option value="Sedentary">Sedentary (little or no exercise)</option>
+                                <option value="Lightly active">Lightly active (light exercise 1-3 days/week)</option>
+                                <option value="Moderately active">Moderately active (moderate exercise 3-5 days/week)</option>
+                                <option value="Very active">Very active (hard exercise 6-7 days/week)</option>
+                                <option value="Extra active">Extra active (very hard exercise, physical job or training twice a day)</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="dietary_preferences" class="form-label">Dietary Preferences</label>
+                            <select class="form-select" id="dietary_preferences" name="dietary_preferences" required>
+                                <option value="">Select Dietary Preference</option>
+                                <option value="No restrictions">No restrictions</option>
+                                <option value="Vegetarian">Vegetarian</option>
+                                <option value="Vegan">Vegan</option>
+                                <option value="Pescatarian">Pescatarian</option>
+                                <option value="Keto">Keto</option>
+                                <option value="Paleo">Paleo</option>
+                                <option value="Mediterranean">Mediterranean</option>
+                                <option value="Low-carb">Low-carb</option>
+                                <option value="Low-fat">Low-fat</option>
+                                <option value="Gluten-free">Gluten-free</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="allergies" class="form-label">Allergies or Food Restrictions</label>
+                            <textarea class="form-control" id="allergies" name="allergies" placeholder="List any food allergies or restrictions (e.g., nuts, dairy, gluten)"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="goals" class="form-label">Health & Fitness Goals</label>
+                            <select class="form-select" id="goals" name="goals" required>
+                                <option value="">Select Primary Goal</option>
+                                <option value="Weight loss">Weight loss</option>
+                                <option value="Weight gain">Weight gain</option>
+                                <option value="Maintain weight">Maintain weight</option>
+                                <option value="Muscle gain">Muscle gain</option>
+                                <option value="Increase energy">Increase energy</option>
+                                <option value="Improve athletic performance">Improve athletic performance</option>
+                                <option value="Manage health condition">Manage health condition</option>
+                                <option value="General health improvement">General health improvement</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2 col-md-6 mx-auto mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-utensils me-2"></i>Generate Diet Plan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h4>Personalized Plan</h4>
+                        <p class="text-secondary">Get a diet plan tailored to your unique body metrics, preferences, and goals</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h4>AI-Powered</h4>
+                        <p class="text-secondary">Leveraging Llama 3.3 70B, one of the most advanced language models for nutrition guidance</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h4>Downloadable PDF</h4>
+                        <p class="text-secondary">Take your diet plan with you anywhere with a beautifully formatted PDF download</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
