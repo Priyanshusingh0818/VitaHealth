@@ -64,15 +64,15 @@
 ## 🛠️ Technology Stack
 
 ### **Frontend Technologies**
-- **React.js** - Modern component-based UI framework
-- **Next.js** - Full-stack React framework for optimal performance
-- **TypeScript** - Type-safe development for better code quality
+- **chart.js** - Modern component-based UI framework
+- **tensorflow.js** - Full-stack React framework for optimal performance
+- **JavaScript** - Type-safe development for better code quality
 - **Tailwind CSS** - Utility-first CSS for responsive design
 
 ### **Backend & AI**
 - **Node.js** - High-performance JavaScript runtime
 - **Python** - AI/ML processing and model inference
-- **FastAPI** - High-performance API framework
+- **Flask API** - High-performance API framework
 - **Large Language Models** - Fine-tuned medical AI models
 
 ### **Database & Storage**
@@ -192,16 +192,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support & Contact
 
-### Documentation
-- [User Guide](docs/user-guide.md)
-- [API Documentation](docs/api.md)
-- [Developer Resources](docs/developers.md)
-
-### Support Channels
-- **Email**: support@vitahealth.com
-- **Documentation**: [docs.vitahealth.com](https://docs.vitahealth.com)
-- **Community Forum**: [community.vitahealth.com](https://community.vitahealth.com)
-- **Issue Tracker**: [GitHub Issues](https://github.com/yourusername/vitahealth/issues)
 
 ### Emergency Support
 For medical emergencies, please contact your local emergency services immediately. VitaHealth is not a replacement for professional medical care.
