@@ -1,7 +1,8 @@
 # 🏥 VitaHealth - AI-Powered Healthcare Platform
 
 <div align="center">
-  <img src="https://img.shields.io/badge/AI-Powered-blue?style=for-the-badge&logo=brain&logoColor=white" alt="AI Powered">
+  <img
+    src="https://img.shields.io/badge/AI-Powered-blue?style=for-the-badge&logo=brain&logoColor=white" alt="AI Powered">
   <img src="https://img.shields.io/badge/Healthcare-Innovation-green?style=for-the-badge&logo=medical-cross&logoColor=white" alt="Healthcare">
   <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status">
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License">
